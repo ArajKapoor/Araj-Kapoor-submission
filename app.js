@@ -15,6 +15,7 @@ let currentTheme = 'Minimalist Modern';
 const money = n => new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n);
 function best(items, budget, area) { return items.filter(x => x.styles.includes(currentTheme) && x.minArea <= area).sort((a,b) => (b.water/a.price)-(a.water/b.price)).find(x=>x.price<=budget); }
 function generate(triggerType = 'init') {
+  document.body.setAttribute('data-theme', currentTheme);
   const width = +document.querySelector('#width').value || 8, length = +document.querySelector('#length').value || 10;
   const budget = +document.querySelector('#budget').value, area = width * length, eco = document.querySelector('#sustainability').checked;
   const groups = ['INTELLIGENT TOILET','VANITY','SHOWER SYSTEM','FAUCET']; let remaining = budget;

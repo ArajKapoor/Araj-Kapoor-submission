@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kohler Atelier - AI Bathroom Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dynamic.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="control-panel">
+        <div class="brand"><span class="brand-mark">K</span><span>KOHLER <em>ATELIER</em></span></div>
+        <div class="eyebrow">AI BATHROOM PLANNER / 01</div>
+        <h1>Your bathroom,<br /><i>considered.</i></h1>
+        <p class="intro">Tell us about your space. Our local constraint engine builds a Kohler collection that fits, feels right, and uses less water.</p>
+
+        <form id="design-form">
+          <fieldset><legend>Room dimensions</legend><div class="field-row"><label>Width <input id="width" type="number" min="5" max="30" value="8" step="0.5" /><small>ft</small></label><label>Length <input id="length" type="number" min="5" max="30" value="10" step="0.5" /><small>ft</small></label></div></fieldset>
+          <fieldset><legend>Investment</legend><label class="wide">Maximum budget <output id="budget-value">₹12,00,000</output><input id="budget" type="range" min="350000" max="2500000" step="25000" value="1200000" /></label></fieldset>
+          <fieldset><legend>Design language</legend><div class="theme-grid" id="theme-picker"><button type="button" class="theme selected" data-theme="Minimalist Modern"><span class="swatch modern"></span>Minimalist<br />Modern</button><button type="button" class="theme" data-theme="Japanese Zen"><span class="swatch zen"></span>Japanese<br />Zen</button><button type="button" class="theme" data-theme="Classic Luxury"><span class="swatch classic"></span>Classic<br />Luxury</button></div></fieldset>
+          <fieldset class="ai-field"><legend>AI style scan <span>HUGGING FACE</span></legend><label class="wide">Describe your ideal space<textarea id="style-description" maxlength="280" placeholder="e.g. A calm spa retreat with warm timber and soft brass"></textarea></label><button id="style-scan" type="button" class="scan-button"><i>✦</i> Read my design intent</button><p id="ai-status" class="ai-status">Open model ready when you are</p></fieldset>
+          <label class="toggle"><input id="sustainability" type="checkbox" checked /><span></span>Prioritize water conservation</label>
+          <button class="generate" type="submit">Generate my design <b>→</b></button>
+        </form>
+        <p class="local-note"><span></span> Runs locally - no paid API required</p>
+      </aside>
+
+      <section class="design-panel">
+        <header><div><p class="eyebrow">GENERATED CONCEPT</p><h2 id="concept-title">A quiet, modern retreat</h2></div><button id="share" class="icon-button" title="Copy summary">↗</button></header>
+        <div class="scene-area">
+          <div class="layout-card">
+            <div class="card-heading"><span>SPATIAL PLAN</span><span id="area-label">80 SQ FT</span></div>
+            <div class="room-wrap"><div id="room" class="room"><div class="window">WINDOW</div><div class="door">ENTRY</div></div></div>
+            <div class="legend"><span><i class="toilet-key"></i>Toilet</span><span><i class="vanity-key"></i>Vanity</span><span><i class="shower-key"></i>Shower</span></div>
+          </div>
+          <div class="mood-card" id="mood-card"><div class="mood-copy"><p>THE EDIT</p><strong id="mood-title">MINIMALIST<br />MODERN</strong><span id="mood-subtitle">Matte black · soft white · oak</span></div><div class="arch arch-one"></div><div class="arch arch-two"></div></div>
+        </div>
+        <section class="results" aria-live="polite">
+          <div class="result-heading"><div><p class="eyebrow">CURATED FOR YOU</p><h3 id="bundle-name">The Essential Intelligence Suite</h3></div><div class="total"><span>COLLECTION TOTAL</span><strong id="total">$0</strong></div></div>
+          <div id="products" class="product-list"></div>
+          <div class="impact"><div class="impact-icon">≈</div><div><strong id="water-saved">0 gal</strong><span>estimated water saved every year</span></div><p>Compared with conventional fixtures. Calculated from product flow specifications.</p></div>
+        </section>
+      </section>
+    </main>
+    <template id="product-template"><article class="product"><div class="product-symbol"></div><div class="product-info"><span class="product-type"></span><strong class="product-name"></strong><small class="product-detail"></small></div><div class="product-price"></div></article></template>
+    
+    <!-- Plugins for dynamic UI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,2411 +1,2322 @@
+
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kohler Atelier – AI Bathroom Designer</title>
-  <meta name="description"
-    content="Design your dream bathroom with Kohler's AI-powered planner. Choose from luxury styles, set your budget, and get a curated collection of premium fixtures." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
-    rel="stylesheet" />
-  <style>
-    /* ============================================================
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kohler Atelier – AI Bathroom Designer</title>
+    <meta name="description" content="Design your dream bathroom with Kohler's AI-powered planner. Choose from luxury styles, set your budget, and get a curated collection of premium fixtures." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+    <style>
+/* ============================================================
    KOHLER ATELIER – Premium Design System
    ============================================================ */
 
-    /* --- THEME VARIABLES --- */
-    :root,
-    [data-theme="Minimalist Modern"] {
-      --bg-deep: #0a0a0f;
-      --bg-surface: #12121a;
-      --bg-card: rgba(255, 255, 255, 0.04);
-      --bg-card-hover: rgba(255, 255, 255, 0.07);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --text-primary: #f0f0f5;
-      --text-secondary: #8b8b9e;
-      --text-muted: #55556a;
-      --accent-1: #6366f1;
-      --accent-2: #818cf8;
-      --accent-glow: rgba(99, 102, 241, 0.3);
-      --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-accent: linear-gradient(135deg, #6366f1, #a78bfa);
-      --mood-bg: linear-gradient(160deg, #1a1a2e 0%, #16213e 100%);
-      --mood-arch1: rgba(99, 102, 241, 0.35);
-      --mood-arch2: rgba(129, 140, 248, 0.2);
-      --border-color: rgba(255, 255, 255, 0.06);
-      --input-bg: rgba(255, 255, 255, 0.05);
-      --toggle-bg: rgba(255, 255, 255, 0.12);
-      --indicator: #6366f1;
-      --fixture-toilet: #23234a;
-      --fixture-vanity: #2d2d5e;
-      --fixture-shower: repeating-linear-gradient(45deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.15) 4px, transparent 4px, transparent 8px);
-      --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
-      --swatch-2: linear-gradient(135deg, #dbd1bf, #90846e);
-      --swatch-3: linear-gradient(135deg, #f2e3c7, #715237);
-      --confetti-1: #6366f1;
-      --confetti-2: #a78bfa;
-      --confetti-3: #c084fc;
-    }
-
-    [data-theme="Japanese Zen"] {
-      --bg-deep: #0d0f0a;
-      --bg-surface: #151a12;
-      --bg-card: rgba(255, 255, 255, 0.04);
-      --bg-card-hover: rgba(255, 255, 255, 0.07);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --text-primary: #e8ece0;
-      --text-secondary: #8a9178;
-      --text-muted: #555e46;
-      --accent-1: #84cc16;
-      --accent-2: #a3e635;
-      --accent-glow: rgba(132, 204, 22, 0.25);
-      --gradient-hero: linear-gradient(135deg, #6b8e23 0%, #556b2f 100%);
-      --gradient-accent: linear-gradient(135deg, #84cc16, #bef264);
-      --mood-bg: linear-gradient(160deg, #1a1f14 0%, #1e2618 100%);
-      --mood-arch1: rgba(132, 204, 22, 0.3);
-      --mood-arch2: rgba(163, 230, 53, 0.15);
-      --border-color: rgba(255, 255, 255, 0.06);
-      --input-bg: rgba(255, 255, 255, 0.05);
-      --toggle-bg: rgba(255, 255, 255, 0.12);
-      --indicator: #84cc16;
-      --fixture-toilet: #1d2a15;
-      --fixture-vanity: #2a3d1e;
-      --fixture-shower: repeating-linear-gradient(45deg, rgba(132, 204, 22, 0.12), rgba(132, 204, 22, 0.12) 4px, transparent 4px, transparent 8px);
-      --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
-      --swatch-2: linear-gradient(135deg, #dbd1bf 0%, #556b2f 100%);
-      --swatch-3: linear-gradient(135deg, #f2e3c7, #715237);
-      --confetti-1: #84cc16;
-      --confetti-2: #a3e635;
-      --confetti-3: #65a30d;
-    }
-
-    [data-theme="Classic Luxury"] {
-      --bg-deep: #0f0b08;
-      --bg-surface: #1a1410;
-      --bg-card: rgba(255, 255, 255, 0.04);
-      --bg-card-hover: rgba(255, 255, 255, 0.07);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-      --text-primary: #f5ede4;
-      --text-secondary: #a09080;
-      --text-muted: #6a5d50;
-      --accent-1: #d97706;
-      --accent-2: #f59e0b;
-      --accent-glow: rgba(217, 119, 6, 0.25);
-      --gradient-hero: linear-gradient(135deg, #92400e 0%, #78350f 100%);
-      --gradient-accent: linear-gradient(135deg, #d97706, #fbbf24);
-      --mood-bg: linear-gradient(160deg, #1f1810 0%, #2a1e12 100%);
-      --mood-arch1: rgba(217, 119, 6, 0.35);
-      --mood-arch2: rgba(245, 158, 11, 0.2);
-      --border-color: rgba(255, 255, 255, 0.06);
-      --input-bg: rgba(255, 255, 255, 0.05);
-      --toggle-bg: rgba(255, 255, 255, 0.12);
-      --indicator: #d97706;
-      --fixture-toilet: #2a1e12;
-      --fixture-vanity: #3d2a15;
-      --fixture-shower: repeating-linear-gradient(45deg, rgba(217, 119, 6, 0.12), rgba(217, 119, 6, 0.12) 4px, transparent 4px, transparent 8px);
-      --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
-      --swatch-2: linear-gradient(135deg, #dbd1bf, #90846e);
-      --swatch-3: linear-gradient(135deg, #d4a574 0%, #78350f 100%);
-      --confetti-1: #d97706;
-      --confetti-2: #f59e0b;
-      --confetti-3: #fbbf24;
-    }
-
-    /* --- TRANSITIONS --- */
-    body,
-    .design-panel,
-    .control-panel,
-    .glass-card,
-    .mood-card,
-    .impact-card,
-    .theme,
-    .scan-button,
-    .product-symbol,
-    .arch-one,
-    .arch-two,
-    .fixture,
-    .room,
-    .window,
-    .door,
-    .generate,
-    .toggle-track {
-      transition: background 0.6s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
-    }
-
-    /* --- RESET & BASE --- */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg-deep);
-      font-family: "Outfit", sans-serif;
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* --- PARTICLE CANVAS --- */
-    #particles {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    /* --- LOADER --- */
-    .loader {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: var(--bg-deep);
-      display: grid;
-      place-items: center;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    .loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .loader-inner {
-      position: relative;
-      width: 80px;
-      height: 80px;
-      display: grid;
-      place-items: center;
-    }
-
-    .loader-ring {
-      position: absolute;
-      inset: 0;
-      border: 2px solid var(--glass-border);
-      border-top-color: var(--accent-1);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    .loader-brand {
-      font-family: "Playfair Display", serif;
-      font-size: 28px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* --- TOP BAR --- */
-    .top-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 32px;
-      background: rgba(10, 10, 15, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-border);
-    }
-
-    .brand {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border: 2px solid var(--accent-1);
-      font-family: "Playfair Display", serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--accent-1);
-      border-radius: 4px;
-    }
-
-    .brand-text {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: var(--text-primary);
-    }
-
-    .brand-text em {
-      font-style: italic;
-      font-family: "Playfair Display", serif;
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .top-nav {
-      display: flex;
-      gap: 4px;
-    }
-
-    .nav-pill {
-      padding: 6px 16px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      border-radius: 100px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .nav-pill:hover {
-      color: var(--text-primary);
-      background: var(--bg-card);
-    }
-
-    .nav-pill.active {
-      color: var(--text-primary);
-      background: var(--bg-card-hover);
-      border: 1px solid var(--glass-border);
-    }
-
-    /* --- MAIN LAYOUT --- */
-    .app-shell {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(340px, 380px) 1fr;
-      min-height: calc(100vh - 61px);
-    }
-
-    /* --- CONTROL PANEL --- */
-    .control-panel {
-      position: relative;
-      border-right: 1px solid var(--glass-border);
-      background: var(--bg-surface);
-      overflow: hidden;
-    }
-
-    .panel-glass {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .panel-content {
-      position: relative;
-      z-index: 1;
-      padding: 28px 30px 20px;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      overflow-y: auto;
-    }
-
-    /* Scrollbar */
-    .panel-content::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .panel-content::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .panel-content::-webkit-scrollbar-thumb {
-      background: var(--glass-border);
-      border-radius: 4px;
-    }
-
-    /* Eyebrow */
-    .eyebrow {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: var(--text-muted);
-      margin: 0 0 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .dot {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-1);
-      box-shadow: 0 0 8px var(--accent-glow);
-    }
-
-    .dot.green {
-      background: #22c55e;
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
-    }
-
-    /* Headings */
-    .control-panel h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(28px, 3vw, 38px);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -1px;
-      margin: 0 0 6px;
-    }
-
-    .control-panel h1 i {
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .intro {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      margin: 12px 0 20px;
-      max-width: 340px;
-    }
-
-    /* --- FORM ELEMENTS --- */
-    fieldset {
-      border: 0;
-      border-top: 1px solid var(--border-color);
-      margin: 0;
-      padding: 14px 0 12px;
-    }
-
-    legend {
-      padding: 0 0 6px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    .field-row {
-      display: flex;
-      gap: 12px;
-    }
-
-    .field-row label {
-      flex: 1;
-    }
-
-    .field-label {
-      display: block;
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .input-wrap {
-      position: relative;
-    }
-
-    input[type="number"] {
-      display: block;
-      width: 100%;
-      border: 1px solid var(--glass-border);
-      border-radius: 8px;
-      padding: 10px 30px 10px 12px;
-      font-family: "Outfit", sans-serif;
-      font-weight: 500;
-      font-size: 15px;
-      color: var(--text-primary);
-      background: var(--input-bg);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    input[type="number"]:focus {
-      outline: none;
-      border-color: var(--accent-1);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-
-    .input-wrap small {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 10px;
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    /* Range Slider */
-    .range-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    output {
-      font-family: "Outfit", sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--accent-2);
-    }
-
-    input[type="range"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 6px;
-      border-radius: 3px;
-      background: var(--input-bg);
-      margin: 14px 0 4px;
-      cursor: pointer;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--gradient-accent);
-      box-shadow: 0 0 10px var(--accent-glow);
-      cursor: grab;
-      transition: transform 0.2s ease;
-    }
-
-    input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.2);
-    }
-
-    input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--gradient-accent);
-      box-shadow: 0 0 10px var(--accent-glow);
-      border: 0;
-      cursor: grab;
-    }
-
-    .range-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 9px;
-      color: var(--text-muted);
-    }
-
-    /* Theme Grid */
-    .theme-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .theme {
-      padding: 10px 8px 8px;
-      text-align: center;
-      border: 1px solid var(--glass-border);
-      border-radius: 10px;
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      font-size: 10px;
-      font-weight: 500;
-      line-height: 1.4;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .theme::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-accent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .theme:hover {
-      border-color: var(--accent-1);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .theme.selected {
-      border-color: var(--accent-1);
-      background: var(--bg-card-hover);
-      color: var(--text-primary);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .theme.selected::before {
-      opacity: 0.08;
-    }
-
-    .swatch {
-      display: block;
-      height: 28px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .theme-name {
-      position: relative;
-      z-index: 1;
-    }
-
-    .modern {
-      background: var(--swatch-1);
-    }
-
-    .zen {
-      background: var(--swatch-2);
-    }
-
-    .classic {
-      background: var(--swatch-3);
-    }
-
-    /* AI Field */
-    .ai-field {
-      padding-bottom: 12px;
-    }
-
-    .hf-badge {
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-left: 6px;
-      font-weight: 700;
-    }
-
-    textarea {
-      resize: vertical;
-      display: block;
-      width: 100%;
-      min-height: 56px;
-      margin-top: 6px;
-      border: 1px solid var(--glass-border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-family: "Outfit", sans-serif;
-      font-size: 12px;
-      line-height: 1.4;
-      color: var(--text-primary);
-      background: var(--input-bg);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    textarea:focus {
-      outline: none;
-      border-color: var(--accent-1);
-      box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-
-    .scan-button {
-      width: 100%;
-      margin-top: 8px;
-      border: 1px solid var(--glass-border);
-      border-radius: 8px;
-      background: var(--bg-card);
-      padding: 10px;
-      color: var(--text-primary);
-      font-family: "Outfit", sans-serif;
-      font-weight: 600;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .scan-button:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--accent-1);
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-
-    .scan-button:disabled {
-      opacity: 0.5;
-      cursor: wait;
-    }
-
-    .scan-icon {
-      margin-right: 6px;
-      display: inline-block;
-      animation: pulse-star 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse-star {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.6;
-        transform: scale(1.2);
-      }
-    }
-
-    .ai-status {
-      margin: 8px 0 0;
-      font-size: 10px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* Photo Style Match */
-    .photo-drop {
-      display: block;
-      cursor: pointer;
-    }
-
-    .photo-dropzone {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      text-align: center;
-      padding: 16px 10px;
-      border: 1.5px dashed var(--glass-border);
-      border-radius: 10px;
-      background: var(--input-bg);
-      transition: all 0.25s ease;
-    }
-
-    .photo-drop:hover .photo-dropzone {
-      border-color: var(--accent-1);
-      background: var(--bg-card-hover);
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-
-    .photo-dropzone.has-image {
-      padding: 0;
-      border-style: solid;
-      overflow: hidden;
-    }
-
-    .photo-icon {
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .photo-hint {
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
-
-    .photo-preview-img {
-      display: block;
-      width: 100%;
-      max-height: 130px;
-      object-fit: cover;
-    }
-
-    .palette-swatches {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.15);
-      width: 100%;
-    }
-
-    .palette-swatch {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Toggle */
-    .toggle {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0 16px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .toggle input {
-      display: none;
-    }
-
-    .toggle-track {
-      width: 36px;
-      height: 20px;
-      border-radius: 12px;
-      background: var(--toggle-bg);
-      position: relative;
-      flex-shrink: 0;
-      transition: background 0.3s ease;
-    }
-
-    .toggle-thumb {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      left: 2px;
-      top: 2px;
-      background: var(--text-muted);
-      transition: all 0.3s ease;
-    }
-
-    .toggle input:checked~.toggle-track {
-      background: var(--accent-1);
-    }
-
-    .toggle input:checked~.toggle-track .toggle-thumb {
-      left: 18px;
-      background: white;
-      box-shadow: 0 0 8px var(--accent-glow);
-    }
-
-    .toggle-label {
-      color: var(--text-secondary);
-    }
-
-    /* Generate Button */
-    .generate {
-      width: 100%;
-      border: 0;
-      border-radius: 12px;
-      padding: 16px 20px;
-      background: var(--gradient-accent);
-      color: white;
-      font-family: "Outfit", sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    .generate::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-
-    .generate:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px var(--accent-glow);
-    }
-
-    .generate:hover::before {
-      transform: translateX(100%);
-    }
-
-    .generate:active {
-      transform: translateY(0);
-    }
-
-    .arrow {
-      font-size: 20px;
-      transition: transform 0.3s ease;
-    }
-
-    .generate:hover .arrow {
-      transform: translateX(4px);
-    }
-
-    /* Local Note */
-    .local-note {
-      margin-top: auto;
-      padding-top: 16px;
-      font-size: 10px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* --- DESIGN PANEL --- */
-    .design-panel {
-      padding: 28px clamp(24px, 4vw, 60px);
-      background: var(--bg-deep);
-      overflow-y: auto;
-    }
-
-    .design-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 24px;
-    }
-
-    .design-panel .eyebrow {
-      margin-bottom: 6px;
-    }
-
-    .design-panel h2 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(24px, 3vw, 38px);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -0.5px;
-    }
-
-    .share-btn {
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--glass-border);
-      border-radius: 10px;
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .share-btn:hover {
-      color: var(--accent-1);
-      border-color: var(--accent-1);
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-
-    /* --- SCENE AREA --- */
-    .scene-area {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 16px;
-    }
-
-    /* Glass Card */
-    .glass-card {
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      box-shadow: var(--glass-shadow);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-    }
-
-    .glass-card:hover {
-      border-color: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    /* AI Moodboard */
-    .moodboard-card {
-      grid-column: 1 / -1;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .moodboard-card .card-heading {
-      align-items: center;
-    }
-
-    .moodboard-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 5;
-      min-height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--mood-bg);
-    }
-
-    .moodboard-loading {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-      max-width: 320px;
-      padding: 0 20px;
-    }
-
-    .moodboard-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      animation: fadeInUp 0.6s ease;
-    }
-
-    /* Designer's Note */
-    .designer-note {
-      margin-top: 14px;
-      padding: 16px 20px;
-    }
-
-    .designer-note-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
-      margin: 0 0 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .designer-note-text {
-      font-size: 12.5px;
-      line-height: 1.65;
-      color: var(--text-secondary);
-      font-style: italic;
-      margin: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .designer-note-text.loading {
-      opacity: 0.55;
-    }
-
-    /* Layout Card */
-    .layout-card {
-      height: clamp(280px, 38vh, 420px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card-heading {
-      display: flex;
-      justify-content: space-between;
-      padding: 14px 18px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
-    }
-
-    .area-badge {
-      background: var(--bg-card-hover);
-      padding: 3px 10px;
-      border-radius: 100px;
-      color: var(--accent-2);
-      font-size: 10px;
-    }
-
-    .room-wrap {
-      height: calc(100% - 70px);
-      display: grid;
-      place-items: center;
-      padding: 12px;
-    }
-
-    .room {
-      position: relative;
-      background: rgba(255, 255, 255, 0.02);
-      border: 2px solid var(--accent-1);
-      box-shadow: 0 0 20px var(--accent-glow), inset 0 0 0 1px var(--glass-border);
-      transition: width 0.3s, height 0.3s;
-      border-radius: 4px;
-    }
-
-    .room::before,
-    .room::after {
-      content: '';
-      position: absolute;
-      background: var(--glass-border);
-    }
-
-    .room::before {
-      inset: 20px 50% auto 0;
-      height: 1px;
-    }
-
-    .room::after {
-      inset: 50% 0 auto 0;
-      height: 1px;
-    }
-
-    .window {
-      position: absolute;
-      right: 14%;
-      top: -10px;
-      background: var(--accent-1);
-      padding: 2px 8px;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: white;
-      border-radius: 4px;
-    }
-
-    .door {
-      position: absolute;
-      left: -4px;
-      bottom: 7%;
-      transform: translateX(-100%);
-      padding: 3px 6px;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      background: var(--mood-arch1);
-      color: var(--text-primary);
-      border-radius: 4px;
-    }
-
-    .fixture {
-      position: absolute;
-      z-index: 1;
-      border: 2px solid var(--accent-1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      animation: fixtureIn 0.4s ease backwards;
-    }
-
-    @keyframes fixtureIn {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-    }
-
-    .fixture.toilet {
-      background: var(--fixture-toilet);
-      border-radius: 45% 45% 35% 35%;
-      color: var(--text-secondary);
-    }
-
-    .fixture.vanity {
-      background: var(--fixture-vanity);
-      color: var(--text-primary);
-    }
-
-    .fixture.shower {
-      background: var(--fixture-shower);
-      color: var(--text-primary);
-    }
-
-    .legend {
-      position: absolute;
-      bottom: 14px;
-      left: 18px;
-      display: flex;
-      gap: 14px;
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    .legend i {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      margin-right: 4px;
-      vertical-align: middle;
-    }
-
-    .toilet-key {
-      border: 1.5px solid var(--accent-1);
-      border-radius: 50%;
-    }
-
-    .vanity-key {
-      background: var(--fixture-vanity);
-      border-radius: 2px;
-    }
-
-    .shower-key {
-      background: var(--mood-arch1);
-      border-radius: 2px;
-    }
-
-    /* Mood Card */
-    .mood-card {
-      height: clamp(280px, 38vh, 420px);
-      background: var(--mood-bg);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mood-copy {
-      position: absolute;
-      z-index: 3;
-      left: 20px;
-      bottom: 20px;
-    }
-
-    .mood-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      margin: 0 0 8px;
-      color: var(--text-muted);
-    }
-
-    .mood-copy strong {
-      font-family: "Playfair Display", serif;
-      font-size: 24px;
-      line-height: 1;
-      letter-spacing: -0.5px;
-    }
-
-    .mood-sub {
-      display: block;
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-top: 8px;
-    }
-
-    .arch {
-      position: absolute;
-      border-radius: 130px 130px 0 0;
-    }
-
-    .arch-one {
-      height: 85%;
-      width: 55%;
-      right: -8%;
-      bottom: 0;
-      background: var(--mood-arch1);
-      backdrop-filter: blur(8px);
-    }
-
-    .arch-two {
-      height: 68%;
-      width: 42%;
-      right: 18%;
-      bottom: 0;
-      background: var(--mood-arch2);
-      border: 10px solid rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(4px);
-    }
-
-    .mood-glow {
-      position: absolute;
-      top: 20%;
-      right: 10%;
-      width: 120px;
-      height: 120px;
-      background: var(--accent-glow);
-      border-radius: 50%;
-      filter: blur(40px);
-      animation: glow-pulse 3s ease-in-out infinite;
-    }
-
-    @keyframes glow-pulse {
-
-      0%,
-      100% {
-        opacity: 0.3;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.6;
-        transform: scale(1.1);
-      }
-    }
-
-    /* --- RESULTS --- */
-    .results {
-      margin-top: 24px;
-    }
-
-    .result-heading {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-
-    .result-heading h3 {
-      font-family: "Playfair Display", serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-    }
-
-    .total-box {
-      text-align: right;
-    }
-
-    .total-label {
-      display: block;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-
-    .total-price {
-      font-size: 22px;
-      font-weight: 700;
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* Product List */
-    .product-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-    }
-
-    .product {
-      padding: 16px;
-      display: grid;
-      grid-template-columns: 36px 1fr auto;
-      column-gap: 12px;
-      align-items: start;
-      cursor: default;
-      transition: all 0.3s ease;
-    }
-
-    .product:hover {
-      background: var(--bg-card-hover);
-      transform: translateY(-2px);
-    }
-
-    .product-symbol {
-      width: 36px;
-      height: 36px;
-      background: var(--gradient-accent);
-      border-radius: 10px;
-      grid-row: span 2;
-      display: grid;
-      place-items: center;
-      font-size: 14px;
-      color: white;
-    }
-
-    .product:nth-child(2) .product-symbol {
-      border-radius: 50%;
-      background: var(--mood-arch1);
-    }
-
-    .product:nth-child(3) .product-symbol {
-      border-radius: 4px;
-      background: var(--mood-arch2);
-    }
-
-    .product:nth-child(4) .product-symbol {
-      clip-path: polygon(50% 0, 100% 100%, 0 100%);
-      border-radius: 0;
-      background: var(--accent-glow);
-    }
-
-    .product-type {
-      display: block;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-    }
-
-    .product-name {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.3;
-      margin-top: 2px;
-    }
-
-    .product-detail {
-      grid-column: 2 / 4;
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .product-price {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent-2);
-      align-self: center;
-      white-space: nowrap;
-    }
-
-    /* Impact Card */
-    .impact-card {
-      margin-top: 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 18px 22px;
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .impact-icon-wrap {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: var(--gradient-accent);
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      color: white;
-    }
-
-    .impact-text strong {
-      display: block;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent-2);
-    }
-
-    .impact-text span {
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
-
-    .impact-note {
-      margin-left: auto;
-      max-width: 200px;
-      font-size: 10px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    /* --- FOOTER --- */
-    .site-footer {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      padding: 16px 32px;
-      border-top: 1px solid var(--glass-border);
-      background: var(--bg-surface);
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* --- RESPONSIVE --- */
-    @media (max-width: 900px) {
-      .app-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .control-panel {
-        border-right: 0;
-        border-bottom: 1px solid var(--glass-border);
-      }
-
-      .scene-area {
-        grid-template-columns: 1fr;
-      }
-
-      .mood-card {
-        height: 240px;
-      }
-
-      .moodboard-frame {
-        aspect-ratio: 16 / 9;
-      }
-
-      .product-list {
-        grid-template-columns: 1fr;
-      }
-
-      .top-nav {
-        display: none;
-      }
-
-      .impact-card {
-        flex-wrap: wrap;
-      }
-
-      .impact-note {
-        margin-left: 0;
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .panel-content {
-        padding: 20px 16px;
-      }
-
-      .design-panel {
-        padding: 20px 16px;
-      }
-
-      .top-bar {
-        padding: 12px 16px;
-      }
-
-      .site-footer {
-        flex-direction: column;
-        gap: 4px;
-        text-align: center;
-        padding: 12px 16px;
-      }
-    }
-
-    /* --- ANIMATIONS --- */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .control-panel h1 {
-      animation: fadeInUp 0.6s ease backwards;
-      animation-delay: 0.2s;
-    }
-
-    .intro {
-      animation: fadeInUp 0.6s ease backwards;
-      animation-delay: 0.35s;
-    }
-
-    fieldset {
-      animation: fadeInUp 0.5s ease backwards;
-    }
-
-    fieldset:nth-of-type(1) {
-      animation-delay: 0.4s;
-    }
-
-    fieldset:nth-of-type(2) {
-      animation-delay: 0.5s;
-    }
-
-    fieldset:nth-of-type(3) {
-      animation-delay: 0.6s;
-    }
-
-    fieldset:nth-of-type(4) {
-      animation-delay: 0.7s;
-    }
-
-    .generate {
-      animation: fadeInUp 0.5s ease backwards;
-      animation-delay: 0.8s;
-    }
-  </style>
-</head>
-
-<body data-theme="Minimalist Modern">
-
-  <!-- Animated background particles -->
-  <canvas id="particles"></canvas>
-
-  <!-- Loading overlay -->
-  <div id="loader" class="loader">
-    <div class="loader-inner">
-      <div class="loader-ring"></div>
-      <span class="loader-brand">K</span>
+/* --- THEME VARIABLES --- */
+:root,
+[data-theme="Minimalist Modern"] {
+  --bg-deep: #0a0a0f;
+  --bg-surface: #12121a;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --text-primary: #f0f0f5;
+  --text-secondary: #8b8b9e;
+  --text-muted: #55556a;
+  --accent-1: #6366f1;
+  --accent-2: #818cf8;
+  --accent-glow: rgba(99, 102, 241, 0.3);
+  --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-accent: linear-gradient(135deg, #6366f1, #a78bfa);
+  --mood-bg: linear-gradient(160deg, #1a1a2e 0%, #16213e 100%);
+  --mood-arch1: rgba(99, 102, 241, 0.35);
+  --mood-arch2: rgba(129, 140, 248, 0.2);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --toggle-bg: rgba(255, 255, 255, 0.12);
+  --indicator: #6366f1;
+  --fixture-toilet: #23234a;
+  --fixture-vanity: #2d2d5e;
+  --fixture-shower: repeating-linear-gradient(45deg, rgba(99,102,241,0.15), rgba(99,102,241,0.15) 4px, transparent 4px, transparent 8px);
+  --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
+  --swatch-2: linear-gradient(135deg, #dbd1bf, #90846e);
+  --swatch-3: linear-gradient(135deg, #f2e3c7, #715237);
+  --confetti-1: #6366f1;
+  --confetti-2: #a78bfa;
+  --confetti-3: #c084fc;
+}
+
+[data-theme="Japanese Zen"] {
+  --bg-deep: #0d0f0a;
+  --bg-surface: #151a12;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --text-primary: #e8ece0;
+  --text-secondary: #8a9178;
+  --text-muted: #555e46;
+  --accent-1: #84cc16;
+  --accent-2: #a3e635;
+  --accent-glow: rgba(132, 204, 22, 0.25);
+  --gradient-hero: linear-gradient(135deg, #6b8e23 0%, #556b2f 100%);
+  --gradient-accent: linear-gradient(135deg, #84cc16, #bef264);
+  --mood-bg: linear-gradient(160deg, #1a1f14 0%, #1e2618 100%);
+  --mood-arch1: rgba(132, 204, 22, 0.3);
+  --mood-arch2: rgba(163, 230, 53, 0.15);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --toggle-bg: rgba(255, 255, 255, 0.12);
+  --indicator: #84cc16;
+  --fixture-toilet: #1d2a15;
+  --fixture-vanity: #2a3d1e;
+  --fixture-shower: repeating-linear-gradient(45deg, rgba(132,204,22,0.12), rgba(132,204,22,0.12) 4px, transparent 4px, transparent 8px);
+  --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
+  --swatch-2: linear-gradient(135deg, #dbd1bf 0%, #556b2f 100%);
+  --swatch-3: linear-gradient(135deg, #f2e3c7, #715237);
+  --confetti-1: #84cc16;
+  --confetti-2: #a3e635;
+  --confetti-3: #65a30d;
+}
+
+[data-theme="Classic Luxury"] {
+  --bg-deep: #0f0b08;
+  --bg-surface: #1a1410;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --text-primary: #f5ede4;
+  --text-secondary: #a09080;
+  --text-muted: #6a5d50;
+  --accent-1: #d97706;
+  --accent-2: #f59e0b;
+  --accent-glow: rgba(217, 119, 6, 0.25);
+  --gradient-hero: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+  --gradient-accent: linear-gradient(135deg, #d97706, #fbbf24);
+  --mood-bg: linear-gradient(160deg, #1f1810 0%, #2a1e12 100%);
+  --mood-arch1: rgba(217, 119, 6, 0.35);
+  --mood-arch2: rgba(245, 158, 11, 0.2);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --toggle-bg: rgba(255, 255, 255, 0.12);
+  --indicator: #d97706;
+  --fixture-toilet: #2a1e12;
+  --fixture-vanity: #3d2a15;
+  --fixture-shower: repeating-linear-gradient(45deg, rgba(217,119,6,0.12), rgba(217,119,6,0.12) 4px, transparent 4px, transparent 8px);
+  --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
+  --swatch-2: linear-gradient(135deg, #dbd1bf, #90846e);
+  --swatch-3: linear-gradient(135deg, #d4a574 0%, #78350f 100%);
+  --confetti-1: #d97706;
+  --confetti-2: #f59e0b;
+  --confetti-3: #fbbf24;
+}
+
+/* --- TRANSITIONS --- */
+body, .design-panel, .control-panel, .glass-card,
+.mood-card, .impact-card, .theme, .scan-button,
+.product-symbol, .arch-one, .arch-two, .fixture, .room,
+.window, .door, .generate, .toggle-track {
+  transition: background 0.6s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* --- RESET & BASE --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-deep);
+  font-family: "Outfit", sans-serif;
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- PARTICLE CANVAS --- */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* --- LOADER --- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-deep);
+  display: grid;
+  place-items: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-inner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+}
+
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--glass-border);
+  border-top-color: var(--accent-1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loader-brand {
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- TOP BAR --- */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--accent-1);
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-1);
+  border-radius: 4px;
+}
+
+.brand-text {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.brand-text em {
+  font-style: italic;
+  font-family: "Playfair Display", serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.top-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-pill {
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.nav-pill:hover {
+  color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+.nav-pill.active {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  border: 1px solid var(--glass-border);
+}
+
+/* --- MAIN LAYOUT --- */
+.app-shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(340px, 380px) 1fr;
+  min-height: calc(100vh - 61px);
+}
+
+/* --- CONTROL PANEL --- */
+.control-panel {
+  position: relative;
+  border-right: 1px solid var(--glass-border);
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+
+.panel-glass {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.panel-content {
+  position: relative;
+  z-index: 1;
+  padding: 28px 30px 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Scrollbar */
+.panel-content::-webkit-scrollbar {
+  width: 4px;
+}
+.panel-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.panel-content::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+/* Eyebrow */
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-1);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.dot.green {
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+/* Headings */
+.control-panel h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin: 0 0 6px;
+}
+
+.control-panel h1 i {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 12px 0 20px;
+  max-width: 340px;
+}
+
+/* --- FORM ELEMENTS --- */
+fieldset {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 0;
+  padding: 14px 0 12px;
+}
+
+legend {
+  padding: 0 0 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.field-row {
+  display: flex;
+  gap: 12px;
+}
+
+.field-row label {
+  flex: 1;
+}
+
+.field-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+input[type="number"] {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 10px 30px 10px 12px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--text-primary);
+  background: var(--input-bg);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.input-wrap small {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Range Slider */
+.range-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+output {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--accent-2);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--input-bg);
+  margin: 14px 0 4px;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  border: 0;
+  cursor: grab;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* Theme Grid */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.theme {
+  padding: 10px 8px 8px;
+  text-align: center;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.theme:hover {
+  border-color: var(--accent-1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.theme.selected {
+  border-color: var(--accent-1);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.theme.selected::before {
+  opacity: 0.08;
+}
+
+.swatch {
+  display: block;
+  height: 28px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.theme-name {
+  position: relative;
+  z-index: 1;
+}
+
+.modern { background: var(--swatch-1); }
+.zen { background: var(--swatch-2); }
+.classic { background: var(--swatch-3); }
+
+/* AI Field */
+.ai-field {
+  padding-bottom: 12px;
+}
+
+.hf-badge {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-left: 6px;
+  font-weight: 700;
+}
+
+textarea {
+  resize: vertical;
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 6px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: "Outfit", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  background: var(--input-bg);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.scan-button {
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--bg-card);
+  padding: 10px;
+  color: var(--text-primary);
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scan-button:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-1);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.scan-button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.scan-icon {
+  margin-right: 6px;
+  display: inline-block;
+  animation: pulse-star 2s ease-in-out infinite;
+}
+
+@keyframes pulse-star {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.ai-status {
+  margin: 8px 0 0;
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Photo Style Match */
+.photo-drop {
+  display: block;
+  cursor: pointer;
+}
+
+.photo-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  padding: 16px 10px;
+  border: 1.5px dashed var(--glass-border);
+  border-radius: 10px;
+  background: var(--input-bg);
+  transition: all 0.25s ease;
+}
+
+.photo-drop:hover .photo-dropzone {
+  border-color: var(--accent-1);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.photo-dropzone.has-image {
+  padding: 0;
+  border-style: solid;
+  overflow: hidden;
+}
+
+.photo-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.photo-hint {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.photo-preview-img {
+  display: block;
+  width: 100%;
+  max-height: 130px;
+  object-fit: cover;
+}
+
+.palette-swatches {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.15);
+  width: 100%;
+}
+
+.palette-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Toggle */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 16px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle-track {
+  width: 36px;
+  height: 20px;
+  border-radius: 12px;
+  background: var(--toggle-bg);
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+
+.toggle-thumb {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  left: 2px;
+  top: 2px;
+  background: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.toggle input:checked ~ .toggle-track {
+  background: var(--accent-1);
+}
+
+.toggle input:checked ~ .toggle-track .toggle-thumb {
+  left: 18px;
+  background: white;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.toggle-label {
+  color: var(--text-secondary);
+}
+
+/* Generate Button */
+.generate {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  background: var(--gradient-accent);
+  color: white;
+  font-family: "Outfit", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.generate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.generate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.generate:hover::before {
+  transform: translateX(100%);
+}
+
+.generate:active {
+  transform: translateY(0);
+}
+
+.arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.generate:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Local Note */
+.local-note {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* --- DESIGN PANEL --- */
+.design-panel {
+  padding: 28px clamp(24px, 4vw, 60px);
+  background: var(--bg-deep);
+  overflow-y: auto;
+}
+
+.design-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.design-panel .eyebrow {
+  margin-bottom: 6px;
+}
+
+.design-panel h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+}
+
+.share-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.share-btn:hover {
+  color: var(--accent-1);
+  border-color: var(--accent-1);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* --- SCENE AREA --- */
+.scene-area {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 16px;
+}
+
+/* Glass Card */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* AI Moodboard */
+.moodboard-card {
+  grid-column: 1 / -1;
+  padding: 0;
+  overflow: hidden;
+}
+
+.moodboard-card .card-heading {
+  align-items: center;
+}
+
+.moodboard-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 5;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mood-bg);
+}
+
+.moodboard-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 320px;
+  padding: 0 20px;
+}
+
+.moodboard-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: fadeInUp 0.6s ease;
+}
+
+/* Designer's Note */
+.designer-note {
+  margin-top: 14px;
+  padding: 16px 20px;
+}
+
+.designer-note-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.designer-note-text {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
+  transition: opacity 0.3s ease;
+}
+
+.designer-note-text.loading {
+  opacity: 0.55;
+}
+
+/* Layout Card */
+.layout-card {
+  height: clamp(280px, 38vh, 420px);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+
+.area-badge {
+  background: var(--bg-card-hover);
+  padding: 3px 10px;
+  border-radius: 100px;
+  color: var(--accent-2);
+  font-size: 10px;
+}
+
+.room-wrap {
+  height: calc(100% - 70px);
+  display: grid;
+  place-items: center;
+  padding: 12px;
+}
+
+.room {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 2px solid var(--accent-1);
+  box-shadow: 0 0 20px var(--accent-glow), inset 0 0 0 1px var(--glass-border);
+  transition: width 0.3s, height 0.3s;
+  border-radius: 4px;
+}
+
+.room::before,
+.room::after {
+  content: '';
+  position: absolute;
+  background: var(--glass-border);
+}
+
+.room::before {
+  inset: 20px 50% auto 0;
+  height: 1px;
+}
+
+.room::after {
+  inset: 50% 0 auto 0;
+  height: 1px;
+}
+
+.window {
+  position: absolute;
+  right: 14%;
+  top: -10px;
+  background: var(--accent-1);
+  padding: 2px 8px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: white;
+  border-radius: 4px;
+}
+
+.door {
+  position: absolute;
+  left: -4px;
+  bottom: 7%;
+  transform: translateX(-100%);
+  padding: 3px 6px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: var(--mood-arch1);
+  color: var(--text-primary);
+  border-radius: 4px;
+}
+
+.fixture {
+  position: absolute;
+  z-index: 1;
+  border: 2px solid var(--accent-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  animation: fixtureIn 0.4s ease backwards;
+}
+
+@keyframes fixtureIn {
+  from { opacity: 0; transform: scale(0.8); }
+}
+
+.fixture.toilet {
+  background: var(--fixture-toilet);
+  border-radius: 45% 45% 35% 35%;
+  color: var(--text-secondary);
+}
+
+.fixture.vanity {
+  background: var(--fixture-vanity);
+  color: var(--text-primary);
+}
+
+.fixture.shower {
+  background: var(--fixture-shower);
+  color: var(--text-primary);
+}
+
+.legend {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  display: flex;
+  gap: 14px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.legend i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.toilet-key {
+  border: 1.5px solid var(--accent-1);
+  border-radius: 50%;
+}
+
+.vanity-key {
+  background: var(--fixture-vanity);
+  border-radius: 2px;
+}
+
+.shower-key {
+  background: var(--mood-arch1);
+  border-radius: 2px;
+}
+
+/* Mood Card */
+.mood-card {
+  height: clamp(280px, 38vh, 420px);
+  background: var(--mood-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.mood-copy {
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  bottom: 20px;
+}
+
+.mood-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 0 0 8px;
+  color: var(--text-muted);
+}
+
+.mood-copy strong {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.mood-sub {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+.arch {
+  position: absolute;
+  border-radius: 130px 130px 0 0;
+}
+
+.arch-one {
+  height: 85%;
+  width: 55%;
+  right: -8%;
+  bottom: 0;
+  background: var(--mood-arch1);
+  backdrop-filter: blur(8px);
+}
+
+.arch-two {
+  height: 68%;
+  width: 42%;
+  right: 18%;
+  bottom: 0;
+  background: var(--mood-arch2);
+  border: 10px solid rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(4px);
+}
+
+.mood-glow {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 120px;
+  height: 120px;
+  background: var(--accent-glow);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* --- RESULTS --- */
+.results {
+  margin-top: 24px;
+}
+
+.result-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.result-heading h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.total-box {
+  text-align: right;
+}
+
+.total-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.total-price {
+  font-size: 22px;
+  font-weight: 700;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Product List */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.product {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  column-gap: 12px;
+  align-items: start;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+
+.product:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.product-symbol {
+  width: 36px;
+  height: 36px;
+  background: var(--gradient-accent);
+  border-radius: 10px;
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  color: white;
+}
+
+.product:nth-child(2) .product-symbol {
+  border-radius: 50%;
+  background: var(--mood-arch1);
+}
+
+.product:nth-child(3) .product-symbol {
+  border-radius: 4px;
+  background: var(--mood-arch2);
+}
+
+.product:nth-child(4) .product-symbol {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  border-radius: 0;
+  background: var(--accent-glow);
+}
+
+.product-type {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.product-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.product-detail {
+  grid-column: 2 / 4;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.product-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-2);
+  align-self: center;
+  white-space: nowrap;
+}
+
+/* Impact Card */
+.impact-card {
+  margin-top: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 18px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.impact-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--gradient-accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: white;
+}
+
+.impact-text strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.impact-text span {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.impact-note {
+  margin-left: auto;
+  max-width: 200px;
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* --- FOOTER --- */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-top: 1px solid var(--glass-border);
+  background: var(--bg-surface);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .control-panel {
+    border-right: 0;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .scene-area {
+    grid-template-columns: 1fr;
+  }
+
+  .mood-card {
+    height: 240px;
+  }
+
+  .moodboard-frame {
+    aspect-ratio: 16 / 9;
+  }
+
+  .product-list {
+    grid-template-columns: 1fr;
+  }
+
+  .top-nav {
+    display: none;
+  }
+
+  .impact-card {
+    flex-wrap: wrap;
+  }
+
+  .impact-note {
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel-content {
+    padding: 20px 16px;
+  }
+
+  .design-panel {
+    padding: 20px 16px;
+  }
+
+  .top-bar {
+    padding: 12px 16px;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    padding: 12px 16px;
+  }
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.control-panel h1 {
+  animation: fadeInUp 0.6s ease backwards;
+  animation-delay: 0.2s;
+}
+
+.intro {
+  animation: fadeInUp 0.6s ease backwards;
+  animation-delay: 0.35s;
+}
+
+fieldset {
+  animation: fadeInUp 0.5s ease backwards;
+}
+
+fieldset:nth-of-type(1) { animation-delay: 0.4s; }
+fieldset:nth-of-type(2) { animation-delay: 0.5s; }
+fieldset:nth-of-type(3) { animation-delay: 0.6s; }
+fieldset:nth-of-type(4) { animation-delay: 0.7s; }
+
+.generate {
+  animation: fadeInUp 0.5s ease backwards;
+  animation-delay: 0.8s;
+}
+
+</style>
+  </head>
+  <body data-theme="Minimalist Modern">
+
+    <!-- Animated background particles -->
+    <canvas id="particles"></canvas>
+
+    <!-- Loading overlay -->
+    <div id="loader" class="loader">
+      <div class="loader-inner">
+        <div class="loader-ring"></div>
+        <span class="loader-brand">K</span>
+      </div>
     </div>
-  </div>
 
-  <header class="top-bar">
-    <div class="brand">
-      <span class="brand-mark">K</span>
-      <span class="brand-text">KOHLER <em>ATELIER</em></span>
-    </div>
-    <nav class="top-nav">
-      <span class="nav-pill active">Designer</span>
-      <span class="nav-pill">Collection</span>
-      <span class="nav-pill">About</span>
-    </nav>
-  </header>
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-mark">K</span>
+        <span class="brand-text">KOHLER <em>ATELIER</em></span>
+      </div>
+      <nav class="top-nav">
+        <span class="nav-pill active">Designer</span>
+        <span class="nav-pill">Collection</span>
+        <span class="nav-pill">About</span>
+      </nav>
+    </header>
 
-  <main class="app-shell">
-    <!-- LEFT: Controls -->
-    <aside class="control-panel">
-      <div class="panel-glass"></div>
-      <div class="panel-content">
-        <p class="eyebrow"><span class="dot"></span> AI BATHROOM PLANNER</p>
-        <h1>Design your<br /><i>perfect space.</i></h1>
-        <p class="intro">Tell us about your bathroom. Our AI engine builds a Kohler collection that fits your space,
-          matches your style, and saves water.</p>
+    <main class="app-shell">
+      <!-- LEFT: Controls -->
+      <aside class="control-panel">
+        <div class="panel-glass"></div>
+        <div class="panel-content">
+          <p class="eyebrow"><span class="dot"></span> AI BATHROOM PLANNER</p>
+          <h1>Design your<br /><i>perfect space.</i></h1>
+          <p class="intro">Tell us about your bathroom. Our AI engine builds a Kohler collection that fits your space, matches your style, and saves water.</p>
 
-        <form id="design-form">
-          <fieldset>
-            <legend>Room Dimensions</legend>
-            <div class="field-row">
-              <label>
-                <span class="field-label">Width</span>
-                <div class="input-wrap">
-                  <input id="width" type="number" min="5" max="30" value="8" step="0.5" />
-                  <small>ft</small>
+          <form id="design-form">
+            <fieldset>
+              <legend>Room Dimensions</legend>
+              <div class="field-row">
+                <label>
+                  <span class="field-label">Width</span>
+                  <div class="input-wrap">
+                    <input id="width" type="number" min="5" max="30" value="8" step="0.5" />
+                    <small>ft</small>
+                  </div>
+                </label>
+                <label>
+                  <span class="field-label">Length</span>
+                  <div class="input-wrap">
+                    <input id="length" type="number" min="5" max="30" value="10" step="0.5" />
+                    <small>ft</small>
+                  </div>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Investment</legend>
+              <label class="wide">
+                <div class="range-header">
+                  <span class="field-label">Maximum budget</span>
+                  <output id="budget-value">₹12,00,000</output>
+                </div>
+                <input id="budget" type="range" min="350000" max="2500000" step="25000" value="1200000" />
+                <div class="range-labels">
+                  <span>₹3.5L</span>
+                  <span>₹25L</span>
                 </div>
               </label>
-              <label>
-                <span class="field-label">Length</span>
-                <div class="input-wrap">
-                  <input id="length" type="number" min="5" max="30" value="10" step="0.5" />
-                  <small>ft</small>
+            </fieldset>
+
+            <fieldset>
+              <legend>Design Language</legend>
+              <div class="theme-grid" id="theme-picker">
+                <button type="button" class="theme selected" data-theme="Minimalist Modern">
+                  <span class="swatch modern"></span>
+                  <span class="theme-name">Minimalist<br />Modern</span>
+                </button>
+                <button type="button" class="theme" data-theme="Japanese Zen">
+                  <span class="swatch zen"></span>
+                  <span class="theme-name">Japanese<br />Zen</span>
+                </button>
+                <button type="button" class="theme" data-theme="Classic Luxury">
+                  <span class="swatch classic"></span>
+                  <span class="theme-name">Classic<br />Luxury</span>
+                </button>
+              </div>
+            </fieldset>
+
+            <fieldset class="ai-field">
+              <legend>AI Style Scan <span class="hf-badge">HUGGING FACE</span></legend>
+              <label class="wide">
+                <span class="field-label">Describe your ideal space</span>
+                <textarea id="style-description" maxlength="280" placeholder="e.g. A calm spa retreat with warm timber and soft brass accents…"></textarea>
+              </label>
+              <button id="style-scan" type="button" class="scan-button">
+                <span class="scan-icon">✦</span> Read my design intent
+              </button>
+              <p id="ai-status" class="ai-status"><span class="dot green"></span> Open model ready</p>
+            </fieldset>
+
+            <fieldset class="ai-field">
+              <legend>Photo Style Match <span class="hf-badge">VISION</span></legend>
+              <label class="photo-drop" for="photo-input">
+                <input id="photo-input" type="file" accept="image/*" capture="environment" hidden />
+                <div id="photo-dropzone" class="photo-dropzone">
+                  <span class="photo-icon">📷</span>
+                  <span class="photo-hint">Snap or upload a photo of your current bathroom</span>
                 </div>
               </label>
-            </div>
-          </fieldset>
+              <p id="photo-status" class="ai-status"><span class="dot green"></span> Reads color &amp; light locally · photo never leaves your device</p>
+            </fieldset>
 
-          <fieldset>
-            <legend>Investment</legend>
-            <label class="wide">
-              <div class="range-header">
-                <span class="field-label">Maximum budget</span>
-                <output id="budget-value">₹12,00,000</output>
-              </div>
-              <input id="budget" type="range" min="350000" max="2500000" step="25000" value="1200000" />
-              <div class="range-labels">
-                <span>₹3.5L</span>
-                <span>₹25L</span>
-              </div>
+            <label class="toggle">
+              <input id="sustainability" type="checkbox" checked />
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              <span class="toggle-label">Prioritize water conservation</span>
             </label>
-          </fieldset>
 
-          <fieldset>
-            <legend>Design Language</legend>
-            <div class="theme-grid" id="theme-picker">
-              <button type="button" class="theme selected" data-theme="Minimalist Modern">
-                <span class="swatch modern"></span>
-                <span class="theme-name">Minimalist<br />Modern</span>
-              </button>
-              <button type="button" class="theme" data-theme="Japanese Zen">
-                <span class="swatch zen"></span>
-                <span class="theme-name">Japanese<br />Zen</span>
-              </button>
-              <button type="button" class="theme" data-theme="Classic Luxury">
-                <span class="swatch classic"></span>
-                <span class="theme-name">Classic<br />Luxury</span>
-              </button>
-            </div>
-          </fieldset>
-
-          <fieldset class="ai-field">
-            <legend>AI Style Scan <span class="hf-badge">HUGGING FACE</span></legend>
-            <label class="wide">
-              <span class="field-label">Describe your ideal space</span>
-              <textarea id="style-description" maxlength="280"
-                placeholder="e.g. A calm spa retreat with warm timber and soft brass accents…"></textarea>
-            </label>
-            <button id="style-scan" type="button" class="scan-button">
-              <span class="scan-icon">✦</span> Read my design intent
+            <button class="generate" type="submit">
+              <span>Generate my design</span>
+              <span class="arrow">→</span>
             </button>
-            <p id="ai-status" class="ai-status"><span class="dot green"></span> Open model ready</p>
-          </fieldset>
+          </form>
 
-          <fieldset class="ai-field">
-            <legend>Photo Style Match <span class="hf-badge">VISION</span></legend>
-            <label class="photo-drop" for="photo-input">
-              <input id="photo-input" type="file" accept="image/*" capture="environment" hidden />
-              <div id="photo-dropzone" class="photo-dropzone">
-                <span class="photo-icon">📷</span>
-                <span class="photo-hint">Snap or upload a photo of your current bathroom</span>
-              </div>
-            </label>
-            <p id="photo-status" class="ai-status"><span class="dot green"></span> Reads color &amp; light locally ·
-              photo never leaves your device</p>
-          </fieldset>
-
-          <label class="toggle">
-            <input id="sustainability" type="checkbox" checked />
-            <span class="toggle-track"><span class="toggle-thumb"></span></span>
-            <span class="toggle-label">Prioritize water conservation</span>
-          </label>
-
-          <button class="generate" type="submit">
-            <span>Generate my design</span>
-            <span class="arrow">→</span>
-          </button>
-        </form>
-
-        <p class="local-note"><span class="dot green"></span> Runs locally · No paid API required</p>
-      </div>
-    </aside>
-
-    <!-- RIGHT: Design Output -->
-    <section class="design-panel">
-      <div class="design-header">
-        <div>
-          <p class="eyebrow">GENERATED CONCEPT</p>
-          <h2 id="concept-title">A quiet, modern retreat</h2>
+          <p class="local-note"><span class="dot green"></span> Runs locally · No paid API required</p>
         </div>
-        <button id="share" class="share-btn" title="Copy summary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" />
-            <polyline points="16 6 12 2 8 6" />
-            <line x1="12" y1="2" x2="12" y2="15" />
-          </svg>
-        </button>
-      </div>
+      </aside>
 
-      <div class="scene-area">
-        <!-- Spatial plan card -->
-        <div class="layout-card glass-card">
-          <div class="card-heading">
-            <span>SPATIAL PLAN</span>
-            <span id="area-label" class="area-badge">80 SQ FT</span>
+      <!-- RIGHT: Design Output -->
+      <section class="design-panel">
+        <div class="design-header">
+          <div>
+            <p class="eyebrow">GENERATED CONCEPT</p>
+            <h2 id="concept-title">A quiet, modern retreat</h2>
           </div>
-          <div class="room-wrap">
-            <div id="room" class="room">
-              <div class="window">WINDOW</div>
-              <div class="door">ENTRY</div>
+          <button id="share" class="share-btn" title="Copy summary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
+        </div>
+
+        <div class="scene-area">
+          <!-- Spatial plan card -->
+          <div class="layout-card glass-card">
+            <div class="card-heading">
+              <span>SPATIAL PLAN</span>
+              <span id="area-label" class="area-badge">80 SQ FT</span>
+            </div>
+            <div class="room-wrap">
+              <div id="room" class="room">
+                <div class="window">WINDOW</div>
+                <div class="door">ENTRY</div>
+              </div>
+            </div>
+            <div class="legend">
+              <span><i class="toilet-key"></i>Toilet</span>
+              <span><i class="vanity-key"></i>Vanity</span>
+              <span><i class="shower-key"></i>Shower</span>
             </div>
           </div>
-          <div class="legend">
-            <span><i class="toilet-key"></i>Toilet</span>
-            <span><i class="vanity-key"></i>Vanity</span>
-            <span><i class="shower-key"></i>Shower</span>
+
+          <!-- Mood card -->
+          <div class="mood-card glass-card" id="mood-card">
+            <div class="mood-copy">
+              <p class="mood-label">THE EDIT</p>
+              <strong id="mood-title">MINIMALIST<br />MODERN</strong>
+              <span id="mood-subtitle" class="mood-sub">Matte black · soft white · oak</span>
+            </div>
+            <div class="arch arch-one"></div>
+            <div class="arch arch-two"></div>
+            <div class="mood-glow"></div>
+          </div>
+
+          <!-- AI Moodboard card -->
+          <div class="moodboard-card glass-card" id="moodboard-card">
+            <div class="card-heading">
+              <span>AI MOODBOARD <span class="hf-badge">GENERATED</span></span>
+              <span class="area-badge" id="moodboard-badge">Live render</span>
+            </div>
+            <div class="moodboard-frame" id="moodboard-frame">
+              <p class="moodboard-loading" id="moodboard-loading"><span class="dot green"></span> Click "Generate my design" to render a live moodboard</p>
+              <img id="moodboard-img" class="moodboard-img" alt="AI-generated moodboard of the selected bathroom design" hidden />
+            </div>
           </div>
         </div>
 
-        <!-- Mood card -->
-        <div class="mood-card glass-card" id="mood-card">
-          <div class="mood-copy">
-            <p class="mood-label">THE EDIT</p>
-            <strong id="mood-title">MINIMALIST<br />MODERN</strong>
-            <span id="mood-subtitle" class="mood-sub">Matte black · soft white · oak</span>
+        <!-- Products section -->
+        <section class="results" aria-live="polite">
+          <div class="result-heading">
+            <div>
+              <p class="eyebrow">CURATED FOR YOU</p>
+              <h3 id="bundle-name">The Essential Intelligence Suite</h3>
+            </div>
+            <div class="total-box">
+              <span class="total-label">COLLECTION TOTAL</span>
+              <strong id="total" class="total-price">₹0</strong>
+            </div>
           </div>
-          <div class="arch arch-one"></div>
-          <div class="arch arch-two"></div>
-          <div class="mood-glow"></div>
-        </div>
-
-        <!-- AI Moodboard card -->
-        <div class="moodboard-card glass-card" id="moodboard-card">
-          <div class="card-heading">
-            <span>AI MOODBOARD <span class="hf-badge">GENERATED</span></span>
-            <span class="area-badge" id="moodboard-badge">Live render</span>
+          <div id="products" class="product-list"></div>
+          <div class="designer-note glass-card" id="designer-note">
+            <p class="designer-note-label">DESIGNER'S NOTE <span class="hf-badge">AI</span></p>
+            <p id="designer-note-text" class="designer-note-text">Click "Generate my design" for a personalized pitch on this collection.</p>
           </div>
-          <div class="moodboard-frame" id="moodboard-frame">
-            <p class="moodboard-loading" id="moodboard-loading"><span class="dot green"></span> Click "Generate my
-              design" to render a live moodboard</p>
-            <img id="moodboard-img" class="moodboard-img" alt="AI-generated moodboard of the selected bathroom design"
-              hidden />
+          <div class="impact-card">
+            <div class="impact-icon-wrap">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
+            </div>
+            <div class="impact-text">
+              <strong id="water-saved">0 gal</strong>
+              <span>estimated water saved every year</span>
+            </div>
+            <p class="impact-note">Compared with conventional fixtures. Calculated from product flow specifications.</p>
           </div>
-        </div>
-      </div>
-
-      <!-- Products section -->
-      <section class="results" aria-live="polite">
-        <div class="result-heading">
-          <div>
-            <p class="eyebrow">CURATED FOR YOU</p>
-            <h3 id="bundle-name">The Essential Intelligence Suite</h3>
-          </div>
-          <div class="total-box">
-            <span class="total-label">COLLECTION TOTAL</span>
-            <strong id="total" class="total-price">₹0</strong>
-          </div>
-        </div>
-        <div id="products" class="product-list"></div>
-        <div class="designer-note glass-card" id="designer-note">
-          <p class="designer-note-label">DESIGNER'S NOTE <span class="hf-badge">AI</span></p>
-          <p id="designer-note-text" class="designer-note-text">Click "Generate my design" for a personalized pitch on
-            this collection.</p>
-        </div>
-        <div class="impact-card">
-          <div class="impact-icon-wrap">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
-            </svg>
-          </div>
-          <div class="impact-text">
-            <strong id="water-saved">0 gal</strong>
-            <span>estimated water saved every year</span>
-          </div>
-          <p class="impact-note">Compared with conventional fixtures. Calculated from product flow specifications.</p>
-        </div>
+        </section>
       </section>
-    </section>
-  </main>
+    </main>
 
-  <footer class="site-footer">
-    <span>© 2026 Kohler Co. · AI Bathroom Planner</span>
-    <span>Designed with intelligence</span>
-  </footer>
+    <footer class="site-footer">
+      <span>© 2026 Kohler Co. · AI Bathroom Planner</span>
+      <span>Designed with intelligence</span>
+    </footer>
 
-  <!-- Product template -->
-  <template id="product-template">
-    <article class="product glass-card">
-      <div class="product-symbol"></div>
-      <div class="product-info">
-        <span class="product-type"></span>
-        <strong class="product-name"></strong>
-        <small class="product-detail"></small>
-      </div>
-      <div class="product-price"></div>
-    </article>
-  </template>
+    <!-- Product template -->
+    <template id="product-template">
+      <article class="product glass-card">
+        <div class="product-symbol"></div>
+        <div class="product-info">
+          <span class="product-type"></span>
+          <strong class="product-name"></strong>
+          <small class="product-detail"></small>
+        </div>
+        <div class="product-price"></div>
+      </article>
+    </template>
 
-  <!-- Plugins -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script>
-    /* ============================================================
-       KOHLER ATELIER – Application Logic
-       ============================================================ */
+    <!-- Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+/* ============================================================
+   KOHLER ATELIER – Application Logic
+   ============================================================ */
 
-    // ── Product Catalog (prices in INR) ──
-    const catalog = [
-      { id: 'numi', type: 'INTELLIGENT TOILET', name: 'Numi 2.0', price: 8500, styles: ['Minimalist Modern'], water: 4200, minArea: 48, size: [1.6, 2.5], position: [0.12, 0.12], detail: 'Dual-flush · ambient light' },
-      { id: 'eir', type: 'INTELLIGENT TOILET', name: 'Eir Smart Toilet', price: 5200, styles: ['Japanese Zen', 'Minimalist Modern'], water: 3900, minArea: 38, size: [1.55, 2.35], position: [0.12, 0.12], detail: 'Water-saving · heated seat' },
-      { id: 'memoirs', type: 'INTELLIGENT TOILET', name: 'Memoirs Comfort', price: 3100, styles: ['Classic Luxury'], water: 3100, minArea: 34, size: [1.65, 2.45], position: [0.12, 0.12], detail: 'Dual flush · skirted design' },
-      { id: 'anthems', type: 'VANITY', name: 'Anthem 36" Vanity', price: 3150, styles: ['Minimalist Modern'], water: 0, minArea: 45, size: [3, 1.8], position: [0.53, 0.08], detail: 'White oak · integrated storage' },
-      { id: 'kallista', type: 'VANITY', name: 'Tresham Vanity', price: 2700, styles: ['Classic Luxury'], water: 0, minArea: 38, size: [3.3, 1.85], position: [0.5, 0.08], detail: 'Walnut · Carrara-inspired top' },
-      { id: 'tailored', type: 'VANITY', name: 'Tailored 30" Vanity', price: 1950, styles: ['Japanese Zen'], water: 0, minArea: 32, size: [2.5, 1.75], position: [0.56, 0.08], detail: 'Natural oak · quiet-close drawers' },
-      { id: 'statement', type: 'SHOWER SYSTEM', name: 'Statement VES', price: 2400, styles: ['Minimalist Modern', 'Japanese Zen'], water: 1800, minArea: 42, size: [2.7, 2.7], position: [0.55, 0.54], detail: 'Katalyst air-induction technology' },
-      { id: 'artifacts', type: 'SHOWER SYSTEM', name: 'Artifacts Shower', price: 2050, styles: ['Classic Luxury'], water: 1500, minArea: 42, size: [2.65, 2.65], position: [0.55, 0.54], detail: 'MasterShower low-flow system' },
-      { id: 'purist', type: 'FAUCET', name: 'Purist Widespread Faucet', price: 650, styles: ['Japanese Zen', 'Minimalist Modern'], water: 700, minArea: 0, size: null, position: null, detail: '1.2 GPM low-flow aerator' },
-      { id: 'components', type: 'FAUCET', name: 'Components Faucet', price: 850, styles: ['Classic Luxury'], water: 650, minArea: 0, size: null, position: null, detail: '1.2 GPM water-saving aerator' }
-    ].map(item => ({ ...item, price: item.price * 87 }));
+// ── Product Catalog (prices in INR) ──
+const catalog = [
+  { id: 'numi', type: 'INTELLIGENT TOILET', name: 'Numi 2.0', price: 8500, styles: ['Minimalist Modern'], water: 4200, minArea: 48, size: [1.6, 2.5], position: [0.12, 0.12], detail: 'Dual-flush · ambient light' },
+  { id: 'eir', type: 'INTELLIGENT TOILET', name: 'Eir Smart Toilet', price: 5200, styles: ['Japanese Zen', 'Minimalist Modern'], water: 3900, minArea: 38, size: [1.55, 2.35], position: [0.12, 0.12], detail: 'Water-saving · heated seat' },
+  { id: 'memoirs', type: 'INTELLIGENT TOILET', name: 'Memoirs Comfort', price: 3100, styles: ['Classic Luxury'], water: 3100, minArea: 34, size: [1.65, 2.45], position: [0.12, 0.12], detail: 'Dual flush · skirted design' },
+  { id: 'anthems', type: 'VANITY', name: 'Anthem 36" Vanity', price: 3150, styles: ['Minimalist Modern'], water: 0, minArea: 45, size: [3, 1.8], position: [0.53, 0.08], detail: 'White oak · integrated storage' },
+  { id: 'kallista', type: 'VANITY', name: 'Tresham Vanity', price: 2700, styles: ['Classic Luxury'], water: 0, minArea: 38, size: [3.3, 1.85], position: [0.5, 0.08], detail: 'Walnut · Carrara-inspired top' },
+  { id: 'tailored', type: 'VANITY', name: 'Tailored 30" Vanity', price: 1950, styles: ['Japanese Zen'], water: 0, minArea: 32, size: [2.5, 1.75], position: [0.56, 0.08], detail: 'Natural oak · quiet-close drawers' },
+  { id: 'statement', type: 'SHOWER SYSTEM', name: 'Statement VES', price: 2400, styles: ['Minimalist Modern', 'Japanese Zen'], water: 1800, minArea: 42, size: [2.7, 2.7], position: [0.55, 0.54], detail: 'Katalyst air-induction technology' },
+  { id: 'artifacts', type: 'SHOWER SYSTEM', name: 'Artifacts Shower', price: 2050, styles: ['Classic Luxury'], water: 1500, minArea: 42, size: [2.65, 2.65], position: [0.55, 0.54], detail: 'MasterShower low-flow system' },
+  { id: 'purist', type: 'FAUCET', name: 'Purist Widespread Faucet', price: 650, styles: ['Japanese Zen', 'Minimalist Modern'], water: 700, minArea: 0, size: null, position: null, detail: '1.2 GPM low-flow aerator' },
+  { id: 'components', type: 'FAUCET', name: 'Components Faucet', price: 850, styles: ['Classic Luxury'], water: 650, minArea: 0, size: null, position: null, detail: '1.2 GPM water-saving aerator' }
+].map(item => ({ ...item, price: item.price * 87 }));
 
-    const themes = {
-      'Minimalist Modern': ['A quiet, modern retreat', 'THE ESSENTIAL INTELLIGENCE SUITE', 'Matte black · soft white · oak'],
-      'Japanese Zen': ['A restorative, grounded retreat', 'THE STILLNESS SUITE', 'Warm oak · brushed brass · stone'],
-      'Classic Luxury': ['A timeless, tailored retreat', 'THE HERITAGE SUITE', 'Polished nickel · walnut · ivory']
+const themes = {
+  'Minimalist Modern': ['A quiet, modern retreat', 'THE ESSENTIAL INTELLIGENCE SUITE', 'Matte black · soft white · oak'],
+  'Japanese Zen': ['A restorative, grounded retreat', 'THE STILLNESS SUITE', 'Warm oak · brushed brass · stone'],
+  'Classic Luxury': ['A timeless, tailored retreat', 'THE HERITAGE SUITE', 'Polished nickel · walnut · ivory']
+};
+
+let currentTheme = 'Minimalist Modern';
+
+const money = n => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n);
+
+// ── Particle System ──
+function initParticles() {
+  const canvas = document.getElementById('particles');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function createParticle() {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: Math.random() * 2 + 0.5,
+      alpha: Math.random() * 0.4 + 0.1,
     };
+  }
 
-    let currentTheme = 'Minimalist Modern';
+  function init() {
+    resize();
+    particles = [];
+    const count = Math.min(80, Math.floor((w * h) / 15000));
+    for (let i = 0; i < count; i++) {
+      particles.push(createParticle());
+    }
+  }
 
-    const money = n => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n);
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
 
-    // ── Particle System ──
-    function initParticles() {
-      const canvas = document.getElementById('particles');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      let w, h;
+    // Get accent color from theme
+    const style = getComputedStyle(document.documentElement);
+    const accentColor = style.getPropertyValue('--accent-1').trim() || '#6366f1';
 
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-
-      function createParticle() {
-        return {
-          x: Math.random() * w,
-          y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 2 + 0.5,
-          alpha: Math.random() * 0.4 + 0.1,
-        };
-      }
-
-      function init() {
-        resize();
-        particles = [];
-        const count = Math.min(80, Math.floor((w * h) / 15000));
-        for (let i = 0; i < count; i++) {
-          particles.push(createParticle());
-        }
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, w, h);
-
-        // Get accent color from theme
-        const style = getComputedStyle(document.documentElement);
-        const accentColor = style.getPropertyValue('--accent-1').trim() || '#6366f1';
-
-        // Draw connections
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 150) {
-              ctx.strokeStyle = accentColor;
-              ctx.globalAlpha = (1 - dist / 150) * 0.08;
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-            }
-          }
-        }
-
-        // Draw particles
-        particles.forEach(p => {
-          ctx.globalAlpha = p.alpha;
-          ctx.fillStyle = accentColor;
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.strokeStyle = accentColor;
+          ctx.globalAlpha = (1 - dist / 150) * 0.08;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-
-          p.x += p.vx;
-          p.y += p.vy;
-
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-        });
-
-        ctx.globalAlpha = 1;
-        requestAnimationFrame(draw);
-      }
-
-      window.addEventListener('resize', () => { resize(); });
-      init();
-      draw();
-    }
-
-    // ── Loader ──
-    function dismissLoader() {
-      const loader = document.getElementById('loader');
-      if (loader) {
-        setTimeout(() => {
-          loader.classList.add('hidden');
-        }, 600);
-      }
-    }
-
-    // ── Core generation logic ──
-    function generate(triggerType = 'init') {
-      document.body.setAttribute('data-theme', currentTheme);
-
-      const width = +document.querySelector('#width').value || 8;
-      const length = +document.querySelector('#length').value || 10;
-      const budget = +document.querySelector('#budget').value;
-      const area = width * length;
-      const eco = document.querySelector('#sustainability').checked;
-
-      const groups = ['INTELLIGENT TOILET', 'VANITY', 'SHOWER SYSTEM', 'FAUCET'];
-      let remaining = budget;
-
-      const chosen = groups.map(type => {
-        const matches = catalog.filter(x =>
-          x.type === type && x.styles.includes(currentTheme) && x.minArea <= area && x.price <= remaining
-        );
-        const candidate = matches.sort((a, b) =>
-          eco ? (b.water - b.price / 1000) - (a.water - a.price / 1000) : b.price - a.price
-        )[0];
-        if (candidate) remaining -= candidate.price;
-        return candidate;
-      }).filter(Boolean);
-
-      // Fallback
-      if (chosen.length < 3) {
-        const fallback = catalog.filter(x => x.styles.includes(currentTheme) && x.minArea <= area).sort((a, b) => a.price - b.price);
-        remaining = budget;
-        chosen.length = 0;
-        fallback.forEach(x => {
-          if (!chosen.some(p => p.type === x.type) && x.price <= remaining) {
-            chosen.push(x);
-            remaining -= x.price;
-          }
-        });
-      }
-
-      const total = chosen.reduce((s, x) => s + x.price, 0);
-      const saved = chosen.reduce((s, x) => s + x.water, 0);
-
-      // Update text
-      const [title, bundle, mood] = themes[currentTheme];
-      document.querySelector('#concept-title').textContent = title;
-      document.querySelector('#bundle-name').textContent = bundle.replace('THE ', '').split(' ').map(x => x[0] + x.slice(1).toLowerCase()).join(' ');
-      document.querySelector('#mood-title').innerHTML = currentTheme.replace(' ', '<br />').toUpperCase();
-      document.querySelector('#mood-subtitle').textContent = mood;
-      document.querySelector('#area-label').textContent = `${area.toFixed(0)} SQ FT`;
-
-      // Render room
-      const room = document.querySelector('#room');
-      const max = 220;
-      const scale = Math.min(max / width, max / length);
-      room.style.width = `${width * scale}px`;
-      room.style.height = `${length * scale}px`;
-      room.querySelectorAll('.fixture').forEach(e => e.remove());
-
-      chosen.filter(x => x.size).forEach((x, i) => {
-        const el = document.createElement('div');
-        el.className = `fixture ${x.type.includes('TOILET') ? 'toilet' : x.type === 'VANITY' ? 'vanity' : 'shower'}`;
-        el.textContent = x.name.split(' ')[0];
-        el.style.width = `${x.size[0] * scale}px`;
-        el.style.height = `${x.size[1] * scale}px`;
-        el.style.left = `${x.position[0] * width * scale}px`;
-        el.style.top = `${x.position[1] * length * scale}px`;
-        el.style.animationDelay = `${i * 0.1}s`;
-        room.appendChild(el);
-      });
-
-      // Product cards
-      const list = document.querySelector('#products');
-      list.innerHTML = '';
-      const t = document.querySelector('#product-template');
-      const productIcons = ['🚿', '🪞', '🚰', '💧'];
-      chosen.forEach((x, i) => {
-        const node = t.content.cloneNode(true);
-        node.querySelector('.product-type').textContent = x.type;
-        node.querySelector('.product-name').textContent = x.name;
-        node.querySelector('.product-detail').textContent = x.detail;
-        node.querySelector('.product-price').textContent = money(x.price);
-        node.querySelector('.product-symbol').textContent = productIcons[i] || '✦';
-        list.appendChild(node);
-      });
-
-      window.designSummary = `Kohler Atelier: ${currentTheme}, ${width}×${length} ft, ${money(total)} collection, ${saved.toLocaleString()} gallons/year saved.`;
-
-      // ── Plugin Integrations ──
-
-      // 1. Vanilla Tilt for 3D card interactions
-      document.querySelectorAll('.layout-card, .mood-card').forEach(el => {
-        if (el.vanillaTilt) el.vanillaTilt.destroy();
-      });
-      if (typeof VanillaTilt !== 'undefined') {
-        VanillaTilt.init(document.querySelectorAll('.layout-card, .mood-card'), {
-          max: 6, speed: 400, glare: true, 'max-glare': 0.12, scale: 1.01
-        });
-        VanillaTilt.init(document.querySelectorAll('.product.glass-card'), {
-          max: 4, speed: 400, glare: true, 'max-glare': 0.08
-        });
-      }
-
-      // 2. GSAP animations
-      if (typeof gsap !== 'undefined') {
-        if (triggerType === 'submit') {
-          gsap.fromTo('.layout-card, .mood-card',
-            { opacity: 0, y: 30, scale: 0.95 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.15, ease: 'back.out(1.3)' }
-          );
-          gsap.fromTo('.impact-card',
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.5 }
-          );
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
         }
-
-        gsap.fromTo('.product',
-          { opacity: 0, x: -15 },
-          { opacity: 1, x: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out', clearProps: 'all' }
-        );
-
-        // Animated counting
-        const totalEl = document.querySelector('#total');
-        const waterEl = document.querySelector('#water-saved');
-        const curTotal = parseFloat(totalEl.textContent.replace(/[^0-9.-]+/g, '')) || 0;
-        const curWater = parseFloat(waterEl.textContent.replace(/[^0-9.-]+/g, '')) || 0;
-
-        gsap.to({ t: curTotal, w: curWater }, {
-          t: total, w: saved, duration: 0.9, ease: 'power2.out',
-          onUpdate: function () {
-            totalEl.textContent = money(this.targets()[0].t);
-            waterEl.textContent = Math.round(this.targets()[0].w).toLocaleString() + ' gal';
-          }
-        });
-      } else {
-        document.querySelector('#total').textContent = money(total);
-        document.querySelector('#water-saved').textContent = `${saved.toLocaleString()} gal`;
-      }
-
-      // 3. Canvas Confetti on explicit generation
-      if (triggerType === 'submit' && typeof confetti !== 'undefined') {
-        const style = getComputedStyle(document.documentElement);
-        const c1 = style.getPropertyValue('--confetti-1').trim();
-        const c2 = style.getPropertyValue('--confetti-2').trim();
-        const c3 = style.getPropertyValue('--confetti-3').trim();
-
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.65 },
-          colors: [c1, c2, c3],
-          disableForReducedMotion: true
-        });
-      }
-
-      // 4. AI Designer's Note + AI Moodboard — only on explicit user actions,
-      // never on slider drags, so the free-tier APIs never get hammered and
-      // the page never depends on a network call just to load.
-      if (triggerType === 'submit') {
-        fetchDesignerNote(currentTheme, chosen, total, saved, budget);
-        requestMoodboard(currentTheme, chosen);
       }
     }
 
-    // ── AI Designer's Note (backend proxy first, then Pollinations, then local) ──
+    // Draw particles
+    particles.forEach(p => {
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = accentColor;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
 
-    // Set this after deploying backend/worker.js (see backend/README.md).
-    // Left empty, the app just skips straight to the direct Pollinations call
-    // below — nothing breaks if the backend isn't deployed yet.
-    const WORKER_URL = 'kohler-atelier-backend.kapooraraj070306.workers.dev'; // e.g. 'https://kohler-atelier-backend.YOUR-SUBDOMAIN.workers.dev'
+      p.x += p.vx;
+      p.y += p.vy;
 
-    let rationaleController = null;
-
-    function localRationale(theme, chosenList, total, saved) {
-      const standout = chosenList[0];
-      const moodLine = {
-        'Minimalist Modern': 'a quiet, considered retreat',
-        'Japanese Zen': 'a calm, grounded escape',
-        'Classic Luxury': 'a warm, timeless statement'
-      }[theme] || 'a considered retreat';
-      return `This collection reads as ${moodLine}, anchored by the ${standout ? standout.name : 'featured piece'}. ` +
-        `At ${money(total)}, it stays within your budget while saving an estimated ${saved.toLocaleString()} gallons a year — ` +
-        `thoughtful design that respects both your space and the planet.`;
-    }
-
-    async function fetchDesignerNote(theme, chosenList, total, saved, budget) {
-      const noteEl = document.querySelector('#designer-note-text');
-      if (!noteEl || !chosenList.length) return;
-
-      if (rationaleController) rationaleController.abort();
-      rationaleController = new AbortController();
-      const timeout = setTimeout(() => rationaleController.abort(), 8000);
-
-      const standout = chosenList[0];
-      noteEl.classList.add('loading');
-      noteEl.textContent = 'Writing your personalized pitch…';
-
-      // 1. Try the backend proxy first — Groq quality, key kept server-side.
-      if (WORKER_URL) {
-        try {
-          const res = await fetch(`${WORKER_URL}/api/rationale`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              theme,
-              standoutName: standout.name,
-              total: money(total),
-              budget: money(budget),
-              waterSaved: saved
-            }),
-            signal: rationaleController.signal
-          });
-          if (res.ok) {
-            const data = await res.json();
-            if (data.text) {
-              clearTimeout(timeout);
-              noteEl.textContent = data.text;
-              noteEl.classList.remove('loading');
-              return;
-            }
-          }
-        } catch { /* fall through to direct Pollinations call */ }
-      }
-
-      // 2. Fall back to calling Pollinations directly from the browser (keyless).
-      const prompt = `You are a high-end KOHLER interior designer. Write a warm, confident pitch in 3 short sentences ` +
-        `(60 words maximum) for this bathroom design bundle. Theme: ${theme}. Standout product: ${standout.name}. ` +
-        `Total price: ${money(total)}, within a budget of ${money(budget)}. Water saved: ${saved.toLocaleString()} gallons per year. ` +
-        `Do not mention AI, math, algorithms, or budgets directly. Speak purely as a luxury designer. Output only the pitch text, no preamble or quotation marks.`;
-
-      try {
-        const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`, {
-          signal: rationaleController.signal
-        });
-        if (!res.ok) throw new Error('bad response');
-        const text = (await res.text()).trim();
-        if (!text) throw new Error('empty response');
-        noteEl.textContent = text;
-      } catch {
-        // 3. Both network paths failed — deterministic local fallback, never empty.
-        noteEl.textContent = localRationale(theme, chosenList, total, saved);
-      } finally {
-        clearTimeout(timeout);
-        noteEl.classList.remove('loading');
-      }
-    }
-
-    // ── AI Moodboard (Pollinations image, no API key) ──
-
-    let lastMoodboardCall = 0;
-    const MOODBOARD_COOLDOWN = 16000; // stays comfortably above the anonymous free-tier limit
-
-    function buildMoodboardPrompt(theme, chosenList) {
-      const names = chosenList.map(x => x.name).join(', ');
-      return `Interior architectural photography of a ${theme} bathroom, featuring ${names}, ` +
-        `soft natural lighting, realistic materials and textures, professional real estate photography, high detail, no people, no text, no watermark`;
-    }
-
-    function requestMoodboard(theme, chosenList) {
-      const loading = document.querySelector('#moodboard-loading');
-      const img = document.querySelector('#moodboard-img');
-      if (!loading || !img || !chosenList.length) return;
-
-      const now = Date.now();
-      if (now - lastMoodboardCall < MOODBOARD_COOLDOWN) {
-        return; // leave whatever is currently shown rather than spamming the free tier
-      }
-      lastMoodboardCall = now;
-
-      const prompt = buildMoodboardPrompt(theme, chosenList);
-      const seed = Math.floor(Math.random() * 100000);
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=960&height=320&seed=${seed}&nologo=true`;
-
-      loading.hidden = false;
-      loading.innerHTML = '<span class="dot"></span> Rendering your space…';
-      img.hidden = true;
-
-      const probe = new Image();
-      probe.onload = () => {
-        img.src = url;
-        img.hidden = false;
-        loading.hidden = true;
-      };
-      probe.onerror = () => {
-        loading.innerHTML = '<span class="dot"></span> Live preview unavailable right now — showing the mood card above instead.';
-      };
-      probe.src = url;
-    }
-
-    // ── Event Listeners ──
-
-    // Budget slider
-    const budgetSlider = document.querySelector('#budget');
-    const budgetOutput = document.querySelector('#budget-value');
-    budgetSlider.addEventListener('input', e => {
-      budgetOutput.textContent = money(+e.target.value);
-    });
-    budgetSlider.addEventListener('change', () => generate('slider'));
-
-    // Dimension inputs
-    document.querySelector('#width').addEventListener('input', () => generate('slider'));
-    document.querySelector('#length').addEventListener('input', () => generate('slider'));
-
-    // Sustainability toggle
-    document.querySelector('#sustainability').addEventListener('change', () => generate('slider'));
-
-    // Theme picker
-    document.querySelectorAll('.theme').forEach(button => {
-      button.addEventListener('click', () => {
-        document.querySelector('.theme.selected').classList.remove('selected');
-        button.classList.add('selected');
-        currentTheme = button.dataset.theme;
-        generate('submit');
-      });
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
     });
 
-    // Form submit
-    document.querySelector('#design-form').addEventListener('submit', e => {
-      e.preventDefault();
-      generate('submit');
-    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
 
-    // Share button
-    document.querySelector('#share').addEventListener('click', async () => {
-      const btn = document.querySelector('#share');
-      try {
-        await navigator.clipboard.writeText(window.designSummary);
-        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
-        setTimeout(() => {
-          btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>';
-        }, 1500);
-      } catch { }
-    });
+  window.addEventListener('resize', () => { resize(); });
+  init();
+  draw();
+}
 
-    // AI Style Scan
-    const keywordTheme = text =>
-      /zen|calm|spa|timber|wood|brass|wabi/i.test(text) ? 'Japanese Zen' :
-        /classic|heritage|marble|ornate|walnut|nickel/i.test(text) ? 'Classic Luxury' :
-          'Minimalist Modern';
+// ── Loader ──
+function dismissLoader() {
+  const loader = document.getElementById('loader');
+  if (loader) {
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 600);
+  }
+}
 
-    document.querySelector('#style-scan').addEventListener('click', async () => {
-      const input = document.querySelector('#style-description').value.trim();
-      const status = document.querySelector('#ai-status');
-      const button = document.querySelector('#style-scan');
+// ── Core generation logic ──
+function generate(triggerType = 'init') {
+  document.body.setAttribute('data-theme', currentTheme);
 
-      if (!input) {
-        status.innerHTML = '<span class="dot"></span> Add a few words about the atmosphere you want.';
-        return;
+  const width = +document.querySelector('#width').value || 8;
+  const length = +document.querySelector('#length').value || 10;
+  const budget = +document.querySelector('#budget').value;
+  const area = width * length;
+  const eco = document.querySelector('#sustainability').checked;
+
+  const groups = ['INTELLIGENT TOILET', 'VANITY', 'SHOWER SYSTEM', 'FAUCET'];
+  let remaining = budget;
+
+  const chosen = groups.map(type => {
+    const matches = catalog.filter(x =>
+      x.type === type && x.styles.includes(currentTheme) && x.minArea <= area && x.price <= remaining
+    );
+    const candidate = matches.sort((a, b) =>
+      eco ? (b.water - b.price / 1000) - (a.water - a.price / 1000) : b.price - a.price
+    )[0];
+    if (candidate) remaining -= candidate.price;
+    return candidate;
+  }).filter(Boolean);
+
+  // Fallback
+  if (chosen.length < 3) {
+    const fallback = catalog.filter(x => x.styles.includes(currentTheme) && x.minArea <= area).sort((a, b) => a.price - b.price);
+    remaining = budget;
+    chosen.length = 0;
+    fallback.forEach(x => {
+      if (!chosen.some(p => p.type === x.type) && x.price <= remaining) {
+        chosen.push(x);
+        remaining -= x.price;
       }
+    });
+  }
 
-      button.disabled = true;
-      status.innerHTML = '<span class="dot"></span> Loading open model for private, in-browser analysis…';
+  const total = chosen.reduce((s, x) => s + x.price, 0);
+  const saved = chosen.reduce((s, x) => s + x.water, 0);
 
-      try {
-        const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.1');
-        const classify = await pipeline('zero-shot-classification');
-        const result = await classify(input, ['Minimalist Modern', 'Japanese Zen', 'Classic Luxury']);
-        currentTheme = result.labels[0];
-        status.innerHTML = `<span class="dot green"></span> AI read: <strong>${currentTheme}</strong> (${Math.round(result.scores[0] * 100)}% confidence)`;
-      } catch (error) {
-        currentTheme = keywordTheme(input);
-        status.innerHTML = `<span class="dot green"></span> Style matched: <strong>${currentTheme}</strong> (local analysis)`;
-      }
+  // Update text
+  const [title, bundle, mood] = themes[currentTheme];
+  document.querySelector('#concept-title').textContent = title;
+  document.querySelector('#bundle-name').textContent = bundle.replace('THE ', '').split(' ').map(x => x[0] + x.slice(1).toLowerCase()).join(' ');
+  document.querySelector('#mood-title').innerHTML = currentTheme.replace(' ', '<br />').toUpperCase();
+  document.querySelector('#mood-subtitle').textContent = mood;
+  document.querySelector('#area-label').textContent = `${area.toFixed(0)} SQ FT`;
 
-      document.querySelectorAll('.theme').forEach(el =>
-        el.classList.toggle('selected', el.dataset.theme === currentTheme)
+  // Render room
+  const room = document.querySelector('#room');
+  const max = 220;
+  const scale = Math.min(max / width, max / length);
+  room.style.width = `${width * scale}px`;
+  room.style.height = `${length * scale}px`;
+  room.querySelectorAll('.fixture').forEach(e => e.remove());
+
+  chosen.filter(x => x.size).forEach((x, i) => {
+    const el = document.createElement('div');
+    el.className = `fixture ${x.type.includes('TOILET') ? 'toilet' : x.type === 'VANITY' ? 'vanity' : 'shower'}`;
+    el.textContent = x.name.split(' ')[0];
+    el.style.width = `${x.size[0] * scale}px`;
+    el.style.height = `${x.size[1] * scale}px`;
+    el.style.left = `${x.position[0] * width * scale}px`;
+    el.style.top = `${x.position[1] * length * scale}px`;
+    el.style.animationDelay = `${i * 0.1}s`;
+    room.appendChild(el);
+  });
+
+  // Product cards
+  const list = document.querySelector('#products');
+  list.innerHTML = '';
+  const t = document.querySelector('#product-template');
+  const productIcons = ['🚿', '🪞', '🚰', '💧'];
+  chosen.forEach((x, i) => {
+    const node = t.content.cloneNode(true);
+    node.querySelector('.product-type').textContent = x.type;
+    node.querySelector('.product-name').textContent = x.name;
+    node.querySelector('.product-detail').textContent = x.detail;
+    node.querySelector('.product-price').textContent = money(x.price);
+    node.querySelector('.product-symbol').textContent = productIcons[i] || '✦';
+    list.appendChild(node);
+  });
+
+  window.designSummary = `Kohler Atelier: ${currentTheme}, ${width}×${length} ft, ${money(total)} collection, ${saved.toLocaleString()} gallons/year saved.`;
+
+  // ── Plugin Integrations ──
+
+  // 1. Vanilla Tilt for 3D card interactions
+  document.querySelectorAll('.layout-card, .mood-card').forEach(el => {
+    if (el.vanillaTilt) el.vanillaTilt.destroy();
+  });
+  if (typeof VanillaTilt !== 'undefined') {
+    VanillaTilt.init(document.querySelectorAll('.layout-card, .mood-card'), {
+      max: 6, speed: 400, glare: true, 'max-glare': 0.12, scale: 1.01
+    });
+    VanillaTilt.init(document.querySelectorAll('.product.glass-card'), {
+      max: 4, speed: 400, glare: true, 'max-glare': 0.08
+    });
+  }
+
+  // 2. GSAP animations
+  if (typeof gsap !== 'undefined') {
+    if (triggerType === 'submit') {
+      gsap.fromTo('.layout-card, .mood-card',
+        { opacity: 0, y: 30, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.15, ease: 'back.out(1.3)' }
       );
-      button.disabled = false;
-      generate('submit');
+      gsap.fromTo('.impact-card',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.5 }
+      );
+    }
+
+    gsap.fromTo('.product',
+      { opacity: 0, x: -15 },
+      { opacity: 1, x: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out', clearProps: 'all' }
+    );
+
+    // Animated counting
+    const totalEl = document.querySelector('#total');
+    const waterEl = document.querySelector('#water-saved');
+    const curTotal = parseFloat(totalEl.textContent.replace(/[^0-9.-]+/g, '')) || 0;
+    const curWater = parseFloat(waterEl.textContent.replace(/[^0-9.-]+/g, '')) || 0;
+
+    gsap.to({ t: curTotal, w: curWater }, {
+      t: total, w: saved, duration: 0.9, ease: 'power2.out',
+      onUpdate: function () {
+        totalEl.textContent = money(this.targets()[0].t);
+        waterEl.textContent = Math.round(this.targets()[0].w).toLocaleString() + ' gal';
+      }
     });
+  } else {
+    document.querySelector('#total').textContent = money(total);
+    document.querySelector('#water-saved').textContent = `${saved.toLocaleString()} gal`;
+  }
 
-    // ── Photo Style Match (local pixel analysis, no upload, no API) ──
+  // 3. Canvas Confetti on explicit generation
+  if (triggerType === 'submit' && typeof confetti !== 'undefined') {
+    const style = getComputedStyle(document.documentElement);
+    const c1 = style.getPropertyValue('--confetti-1').trim();
+    const c2 = style.getPropertyValue('--confetti-2').trim();
+    const c3 = style.getPropertyValue('--confetti-3').trim();
 
-    function rgbToHsl(r, g, b) {
-      r /= 255; g /= 255; b /= 255;
-      const max = Math.max(r, g, b), min = Math.min(r, g, b);
-      let h = 0, s = 0;
-      const l = (max + min) / 2;
-      if (max !== min) {
-        const d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-        switch (max) {
-          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-          case g: h = (b - r) / d + 2; break;
-          case b: h = (r - g) / d + 4; break;
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.65 },
+      colors: [c1, c2, c3],
+      disableForReducedMotion: true
+    });
+  }
+
+  // 4. AI Designer's Note + AI Moodboard — only on explicit user actions,
+  // never on slider drags, so the free-tier APIs never get hammered and
+  // the page never depends on a network call just to load.
+  if (triggerType === 'submit') {
+    fetchDesignerNote(currentTheme, chosen, total, saved, budget);
+    requestMoodboard(currentTheme, chosen);
+  }
+}
+
+// ── AI Designer's Note (backend proxy first, then Pollinations, then local) ──
+
+// Set this after deploying backend/worker.js (see backend/README.md).
+// Left empty, the app just skips straight to the direct Pollinations call
+// below — nothing breaks if the backend isn't deployed yet.
+const WORKER_URL = ''; // e.g. 'https://kohler-atelier-backend.YOUR-SUBDOMAIN.workers.dev'
+
+let rationaleController = null;
+
+function localRationale(theme, chosenList, total, saved) {
+  const standout = chosenList[0];
+  const moodLine = {
+    'Minimalist Modern': 'a quiet, considered retreat',
+    'Japanese Zen': 'a calm, grounded escape',
+    'Classic Luxury': 'a warm, timeless statement'
+  }[theme] || 'a considered retreat';
+  return `This collection reads as ${moodLine}, anchored by the ${standout ? standout.name : 'featured piece'}. ` +
+    `At ${money(total)}, it stays within your budget while saving an estimated ${saved.toLocaleString()} gallons a year — ` +
+    `thoughtful design that respects both your space and the planet.`;
+}
+
+async function fetchDesignerNote(theme, chosenList, total, saved, budget) {
+  const noteEl = document.querySelector('#designer-note-text');
+  if (!noteEl || !chosenList.length) return;
+
+  if (rationaleController) rationaleController.abort();
+  rationaleController = new AbortController();
+  const timeout = setTimeout(() => rationaleController.abort(), 8000);
+
+  const standout = chosenList[0];
+  noteEl.classList.add('loading');
+  noteEl.textContent = 'Writing your personalized pitch…';
+
+  // 1. Try the backend proxy first — Groq quality, key kept server-side.
+  if (WORKER_URL) {
+    try {
+      const res = await fetch(`${WORKER_URL}/api/rationale`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          theme,
+          standoutName: standout.name,
+          total: money(total),
+          budget: money(budget),
+          waterSaved: saved
+        }),
+        signal: rationaleController.signal
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.text) {
+          clearTimeout(timeout);
+          noteEl.textContent = data.text;
+          noteEl.classList.remove('loading');
+          return;
         }
-        h *= 60;
       }
-      return [h, s, l];
+    } catch { /* fall through to direct Pollinations call */ }
+  }
+
+  // 2. Fall back to calling Pollinations directly from the browser (keyless).
+  const prompt = `You are a high-end KOHLER interior designer. Write a warm, confident pitch in 3 short sentences ` +
+    `(60 words maximum) for this bathroom design bundle. Theme: ${theme}. Standout product: ${standout.name}. ` +
+    `Total price: ${money(total)}, within a budget of ${money(budget)}. Water saved: ${saved.toLocaleString()} gallons per year. ` +
+    `Do not mention AI, math, algorithms, or budgets directly. Speak purely as a luxury designer. Output only the pitch text, no preamble or quotation marks.`;
+
+  try {
+    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`, {
+      signal: rationaleController.signal
+    });
+    if (!res.ok) throw new Error('bad response');
+    const text = (await res.text()).trim();
+    if (!text) throw new Error('empty response');
+    noteEl.textContent = text;
+  } catch {
+    // 3. Both network paths failed — deterministic local fallback, never empty.
+    noteEl.textContent = localRationale(theme, chosenList, total, saved);
+  } finally {
+    clearTimeout(timeout);
+    noteEl.classList.remove('loading');
+  }
+}
+
+// ── AI Moodboard (Pollinations image, no API key) ──
+
+let lastMoodboardCall = 0;
+const MOODBOARD_COOLDOWN = 16000; // stays comfortably above the anonymous free-tier limit
+
+function buildMoodboardPrompt(theme, chosenList) {
+  const names = chosenList.map(x => x.name).join(', ');
+  return `Interior architectural photography of a ${theme} bathroom, featuring ${names}, ` +
+    `soft natural lighting, realistic materials and textures, professional real estate photography, high detail, no people, no text, no watermark`;
+}
+
+function requestMoodboard(theme, chosenList) {
+  const loading = document.querySelector('#moodboard-loading');
+  const img = document.querySelector('#moodboard-img');
+  if (!loading || !img || !chosenList.length) return;
+
+  const now = Date.now();
+  if (now - lastMoodboardCall < MOODBOARD_COOLDOWN) {
+    return; // leave whatever is currently shown rather than spamming the free tier
+  }
+  lastMoodboardCall = now;
+
+  const prompt = buildMoodboardPrompt(theme, chosenList);
+  const seed = Math.floor(Math.random() * 100000);
+  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=960&height=320&seed=${seed}&nologo=true`;
+
+  loading.hidden = false;
+  loading.innerHTML = '<span class="dot"></span> Rendering your space…';
+  img.hidden = true;
+
+  const probe = new Image();
+  probe.onload = () => {
+    img.src = url;
+    img.hidden = false;
+    loading.hidden = true;
+  };
+  probe.onerror = () => {
+    loading.innerHTML = '<span class="dot"></span> Live preview unavailable right now — showing the mood card above instead.';
+  };
+  probe.src = url;
+}
+
+// ── Event Listeners ──
+
+// Budget slider
+const budgetSlider = document.querySelector('#budget');
+const budgetOutput = document.querySelector('#budget-value');
+budgetSlider.addEventListener('input', e => {
+  budgetOutput.textContent = money(+e.target.value);
+});
+budgetSlider.addEventListener('change', () => generate('slider'));
+
+// Dimension inputs
+document.querySelector('#width').addEventListener('input', () => generate('slider'));
+document.querySelector('#length').addEventListener('input', () => generate('slider'));
+
+// Sustainability toggle
+document.querySelector('#sustainability').addEventListener('change', () => generate('slider'));
+
+// Theme picker
+document.querySelectorAll('.theme').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelector('.theme.selected').classList.remove('selected');
+    button.classList.add('selected');
+    currentTheme = button.dataset.theme;
+    generate('submit');
+  });
+});
+
+// Form submit
+document.querySelector('#design-form').addEventListener('submit', e => {
+  e.preventDefault();
+  generate('submit');
+});
+
+// Share button
+document.querySelector('#share').addEventListener('click', async () => {
+  const btn = document.querySelector('#share');
+  try {
+    await navigator.clipboard.writeText(window.designSummary);
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';
+    setTimeout(() => {
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>';
+    }, 1500);
+  } catch { }
+});
+
+// AI Style Scan
+const keywordTheme = text =>
+  /zen|calm|spa|timber|wood|brass|wabi/i.test(text) ? 'Japanese Zen' :
+  /classic|heritage|marble|ornate|walnut|nickel/i.test(text) ? 'Classic Luxury' :
+  'Minimalist Modern';
+
+document.querySelector('#style-scan').addEventListener('click', async () => {
+  const input = document.querySelector('#style-description').value.trim();
+  const status = document.querySelector('#ai-status');
+  const button = document.querySelector('#style-scan');
+
+  if (!input) {
+    status.innerHTML = '<span class="dot"></span> Add a few words about the atmosphere you want.';
+    return;
+  }
+
+  button.disabled = true;
+  status.innerHTML = '<span class="dot"></span> Loading open model for private, in-browser analysis…';
+
+  try {
+    const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.0.1');
+    const classify = await pipeline('zero-shot-classification');
+    const result = await classify(input, ['Minimalist Modern', 'Japanese Zen', 'Classic Luxury']);
+    currentTheme = result.labels[0];
+    status.innerHTML = `<span class="dot green"></span> AI read: <strong>${currentTheme}</strong> (${Math.round(result.scores[0] * 100)}% confidence)`;
+  } catch (error) {
+    currentTheme = keywordTheme(input);
+    status.innerHTML = `<span class="dot green"></span> Style matched: <strong>${currentTheme}</strong> (local analysis)`;
+  }
+
+  document.querySelectorAll('.theme').forEach(el =>
+    el.classList.toggle('selected', el.dataset.theme === currentTheme)
+  );
+  button.disabled = false;
+  generate('submit');
+});
+
+// ── Photo Style Match (local pixel analysis, no upload, no API) ──
+
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
     }
+    h *= 60;
+  }
+  return [h, s, l];
+}
 
-    // Reads a photo entirely on-device via Canvas pixel sampling: derives a
-    // circular-mean hue, average saturation/lightness, and the top-3 dominant
-    // colors (quantized to a coarse RGB grid), then maps that palette to the
-    // closest Kohler design language. No image data ever leaves the browser.
-    function analyzePhoto(img) {
-      const size = 64;
-      const canvas = document.createElement('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, size, size);
-      const { data } = ctx.getImageData(0, 0, size, size);
+// Reads a photo entirely on-device via Canvas pixel sampling: derives a
+// circular-mean hue, average saturation/lightness, and the top-3 dominant
+// colors (quantized to a coarse RGB grid), then maps that palette to the
+// closest Kohler design language. No image data ever leaves the browser.
+function analyzePhoto(img) {
+  const size = 64;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, size, size);
+  const { data } = ctx.getImageData(0, 0, size, size);
 
-      const buckets = new Map();
-      let sinH = 0, cosH = 0, sumS = 0, sumL = 0, count = 0;
+  const buckets = new Map();
+  let sinH = 0, cosH = 0, sumS = 0, sumL = 0, count = 0;
 
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i], g = data[i + 1], b = data[i + 2];
-        const key = `${Math.round(r / 32) * 32},${Math.round(g / 32) * 32},${Math.round(b / 32) * 32}`;
-        buckets.set(key, (buckets.get(key) || 0) + 1);
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const key = `${Math.round(r / 32) * 32},${Math.round(g / 32) * 32},${Math.round(b / 32) * 32}`;
+    buckets.set(key, (buckets.get(key) || 0) + 1);
 
-        const [h, s, l] = rgbToHsl(r, g, b);
-        sinH += Math.sin(h * Math.PI / 180);
-        cosH += Math.cos(h * Math.PI / 180);
-        sumS += s;
-        sumL += l;
-        count++;
-      }
+    const [h, s, l] = rgbToHsl(r, g, b);
+    sinH += Math.sin(h * Math.PI / 180);
+    cosH += Math.cos(h * Math.PI / 180);
+    sumS += s;
+    sumL += l;
+    count++;
+  }
 
-      const avgHue = (Math.atan2(sinH / count, cosH / count) * 180 / Math.PI + 360) % 360;
-      const avgSat = sumS / count;
-      const avgLight = sumL / count;
+  const avgHue = (Math.atan2(sinH / count, cosH / count) * 180 / Math.PI + 360) % 360;
+  const avgSat = sumS / count;
+  const avgLight = sumL / count;
 
-      const topColors = [...buckets.entries()]
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 3)
-        .map(([key]) => `rgb(${key})`);
+  const topColors = [...buckets.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([key]) => `rgb(${key})`);
 
-      // Near-neutral / low-saturation rooms (whites, grays, black, chrome) read as modern.
-      // Warm, muted, mid-to-low-light hues (walnut, brass, nickel) read as classic.
-      // Earthy warm-green/olive/timber hues read as zen.
-      let theme;
-      if (avgSat < 0.14) {
-        theme = 'Minimalist Modern';
-      } else if (avgHue >= 25 && avgHue < 95) {
-        theme = 'Japanese Zen';
-      } else if (avgHue < 25 || avgHue >= 330) {
-        theme = avgLight < 0.6 ? 'Classic Luxury' : 'Minimalist Modern';
-      } else {
-        theme = 'Minimalist Modern';
-      }
+  // Near-neutral / low-saturation rooms (whites, grays, black, chrome) read as modern.
+  // Warm, muted, mid-to-low-light hues (walnut, brass, nickel) read as classic.
+  // Earthy warm-green/olive/timber hues read as zen.
+  let theme;
+  if (avgSat < 0.14) {
+    theme = 'Minimalist Modern';
+  } else if (avgHue >= 25 && avgHue < 95) {
+    theme = 'Japanese Zen';
+  } else if (avgHue < 25 || avgHue >= 330) {
+    theme = avgLight < 0.6 ? 'Classic Luxury' : 'Minimalist Modern';
+  } else {
+    theme = 'Minimalist Modern';
+  }
 
-      return { theme, topColors };
-    }
+  return { theme, topColors };
+}
 
-    const photoInput = document.querySelector('#photo-input');
-    const photoDropzone = document.querySelector('#photo-dropzone');
-    const photoStatus = document.querySelector('#photo-status');
+const photoInput = document.querySelector('#photo-input');
+const photoDropzone = document.querySelector('#photo-dropzone');
+const photoStatus = document.querySelector('#photo-status');
 
-    photoInput.addEventListener('change', e => {
-      const file = e.target.files[0];
-      if (!file) return;
+photoInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
 
-      photoStatus.innerHTML = '<span class="dot"></span> Reading pixels on-device…';
+  photoStatus.innerHTML = '<span class="dot"></span> Reading pixels on-device…';
 
-      const reader = new FileReader();
-      reader.onload = ev => {
-        const img = new Image();
-        img.onload = () => {
-          const { theme, topColors } = analyzePhoto(img);
-          currentTheme = theme;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const { theme, topColors } = analyzePhoto(img);
+      currentTheme = theme;
 
-          photoDropzone.classList.add('has-image');
-          photoDropzone.innerHTML = `
+      photoDropzone.classList.add('has-image');
+      photoDropzone.innerHTML = `
         <img class="photo-preview-img" src="${ev.target.result}" alt="Uploaded bathroom photo" />
         <div class="palette-swatches">
           ${topColors.map(c => `<span class="palette-swatch" style="background:${c}"></span>`).join('')}
         </div>
       `;
-          photoStatus.innerHTML = `<span class="dot green"></span> Palette read: <strong>${currentTheme}</strong> matched from your photo`;
+      photoStatus.innerHTML = `<span class="dot green"></span> Palette read: <strong>${currentTheme}</strong> matched from your photo`;
 
-          document.querySelectorAll('.theme').forEach(el =>
-            el.classList.toggle('selected', el.dataset.theme === currentTheme)
-          );
-          generate('submit');
-        };
-        img.onerror = () => {
-          photoStatus.innerHTML = '<span class="dot"></span> Could not read that image — try another file.';
-        };
-        img.src = ev.target.result;
-      };
-      reader.onerror = () => {
-        photoStatus.innerHTML = '<span class="dot"></span> Could not read that file.';
-      };
-      reader.readAsDataURL(file);
-    });
+      document.querySelectorAll('.theme').forEach(el =>
+        el.classList.toggle('selected', el.dataset.theme === currentTheme)
+      );
+      generate('submit');
+    };
+    img.onerror = () => {
+      photoStatus.innerHTML = '<span class="dot"></span> Could not read that image — try another file.';
+    };
+    img.src = ev.target.result;
+  };
+  reader.onerror = () => {
+    photoStatus.innerHTML = '<span class="dot"></span> Could not read that file.';
+  };
+  reader.readAsDataURL(file);
+});
 
-    // ── Initialize ──
-    document.addEventListener('DOMContentLoaded', () => {
-      initParticles();
-      generate();
-      dismissLoader();
-    });
+// ── Initialize ──
+document.addEventListener('DOMContentLoaded', () => {
+  initParticles();
+  generate();
+  dismissLoader();
+});
 
-  </script>
-</body>
-
+</script>
+  </body>
 </html>

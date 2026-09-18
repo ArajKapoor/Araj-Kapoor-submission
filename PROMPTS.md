@@ -39,3 +39,17 @@ Given verified bundle JSON, explain the selected collection in 60 words or fewer
 ```
 
 Suggested local model: Qwen3 8B through Ollama.
+
+## 5. Photo Style Match (multimodal input, no model, no upload)
+
+This is the "upload a photo of your space" input from the architecture's Layer 1 (multi-modal ingestion). Rather than sending the image to a hosted vision-language model, the shipped prototype implements it as a deterministic, on-device computer-vision routine in `app.js` (`analyzePhoto`):
+
+1. Draw the user's photo to an off-screen 64×64 canvas — this is the only "compression" step and it never touches the network.
+2. Convert every sampled pixel to HSL and take the circular mean of hue plus the arithmetic mean of saturation and lightness.
+3. Quantize pixels into a coarse RGB grid to surface the top-3 dominant colors as a palette.
+4. Map the aggregate hue/saturation/lightness to the closest of the three design languages (low saturation → Minimalist Modern; warm mid-tone hues → Classic Luxury; warm-green/earthy hues → Japanese Zen) and feed that straight into the same deterministic solver used for typed input.
+
+Why not route this through the vision LLM described in Layer 2 of the architecture (GPT-4o / Gemini / Pixtral)? For a real "read this floor plan and extract wall measurements" task, a VLM is the right tool and is the natural next iteration. For "read the *mood* of this room," a lightweight, explainable, zero-cost color-histogram heuristic is more demo-reliable, needs no model download or GPU, and keeps the photo entirely on the user's device — consistent with the project's local-first, no-API-key constraint. It is documented here as a workflow rather than a prompt because no LLM is invoked in this step.
+
+**Future upgrade path:** swap `analyzePhoto`'s mapping step for a call to an in-browser zero-shot image classifier (e.g., a small open-weight CLIP variant via Transformers.js, mirroring the text-based AI Style Scan in section 2) once model size/latency trade-offs are acceptable for a live demo.
+    

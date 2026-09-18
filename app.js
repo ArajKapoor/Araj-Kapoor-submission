@@ -318,8 +318,8 @@ document.querySelector('#share').addEventListener('click', async () => {
 // AI Style Scan
 const keywordTheme = text =>
   /zen|calm|spa|timber|wood|brass|wabi/i.test(text) ? 'Japanese Zen' :
-  /classic|heritage|marble|ornate|walnut|nickel/i.test(text) ? 'Classic Luxury' :
-  'Minimalist Modern';
+    /classic|heritage|marble|ornate|walnut|nickel/i.test(text) ? 'Classic Luxury' :
+      'Minimalist Modern';
 
 document.querySelector('#style-scan').addEventListener('click', async () => {
   const input = document.querySelector('#style-description').value.trim();
@@ -350,6 +350,123 @@ document.querySelector('#style-scan').addEventListener('click', async () => {
   );
   button.disabled = false;
   generate('submit');
+});
+
+// ── Photo Style Match (local pixel analysis, no upload, no API) ──
+
+function rgbToHsl(r, g, b) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h *= 60;
+  }
+  return [h, s, l];
+}
+
+// Reads a photo entirely on-device via Canvas pixel sampling: derives a
+// circular-mean hue, average saturation/lightness, and the top-3 dominant
+// colors (quantized to a coarse RGB grid), then maps that palette to the
+// closest Kohler design language. No image data ever leaves the browser.
+function analyzePhoto(img) {
+  const size = 64;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, size, size);
+  const { data } = ctx.getImageData(0, 0, size, size);
+
+  const buckets = new Map();
+  let sinH = 0, cosH = 0, sumS = 0, sumL = 0, count = 0;
+
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const key = `${Math.round(r / 32) * 32},${Math.round(g / 32) * 32},${Math.round(b / 32) * 32}`;
+    buckets.set(key, (buckets.get(key) || 0) + 1);
+
+    const [h, s, l] = rgbToHsl(r, g, b);
+    sinH += Math.sin(h * Math.PI / 180);
+    cosH += Math.cos(h * Math.PI / 180);
+    sumS += s;
+    sumL += l;
+    count++;
+  }
+
+  const avgHue = (Math.atan2(sinH / count, cosH / count) * 180 / Math.PI + 360) % 360;
+  const avgSat = sumS / count;
+  const avgLight = sumL / count;
+
+  const topColors = [...buckets.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([key]) => `rgb(${key})`);
+
+  // Near-neutral / low-saturation rooms (whites, grays, black, chrome) read as modern.
+  // Warm, muted, mid-to-low-light hues (walnut, brass, nickel) read as classic.
+  // Earthy warm-green/olive/timber hues read as zen.
+  let theme;
+  if (avgSat < 0.14) {
+    theme = 'Minimalist Modern';
+  } else if (avgHue >= 25 && avgHue < 95) {
+    theme = 'Japanese Zen';
+  } else if (avgHue < 25 || avgHue >= 330) {
+    theme = avgLight < 0.6 ? 'Classic Luxury' : 'Minimalist Modern';
+  } else {
+    theme = 'Minimalist Modern';
+  }
+
+  return { theme, topColors };
+}
+
+const photoInput = document.querySelector('#photo-input');
+const photoDropzone = document.querySelector('#photo-dropzone');
+const photoStatus = document.querySelector('#photo-status');
+
+photoInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  photoStatus.innerHTML = '<span class="dot"></span> Reading pixels on-device…';
+
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const { theme, topColors } = analyzePhoto(img);
+      currentTheme = theme;
+
+      photoDropzone.classList.add('has-image');
+      photoDropzone.innerHTML = `
+        <img class="photo-preview-img" src="${ev.target.result}" alt="Uploaded bathroom photo" />
+        <div class="palette-swatches">
+          ${topColors.map(c => `<span class="palette-swatch" style="background:${c}"></span>`).join('')}
+        </div>
+      `;
+      photoStatus.innerHTML = `<span class="dot green"></span> Palette read: <strong>${currentTheme}</strong> matched from your photo`;
+
+      document.querySelectorAll('.theme').forEach(el =>
+        el.classList.toggle('selected', el.dataset.theme === currentTheme)
+      );
+      generate('submit');
+    };
+    img.onerror = () => {
+      photoStatus.innerHTML = '<span class="dot"></span> Could not read that image — try another file.';
+    };
+    img.src = ev.target.result;
+  };
+  reader.onerror = () => {
+    photoStatus.innerHTML = '<span class="dot"></span> Could not read that file.';
+  };
+  reader.readAsDataURL(file);
 });
 
 // ── Initialize ──

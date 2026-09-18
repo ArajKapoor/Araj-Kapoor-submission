@@ -927,6 +927,77 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
 
+    /* AI Moodboard */
+    .moodboard-card {
+      grid-column: 1 / -1;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .moodboard-card .card-heading {
+      align-items: center;
+    }
+
+    .moodboard-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 5;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--mood-bg);
+    }
+
+    .moodboard-loading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 320px;
+      padding: 0 20px;
+    }
+
+    .moodboard-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    /* Designer's Note */
+    .designer-note {
+      margin-top: 14px;
+      padding: 16px 20px;
+    }
+
+    .designer-note-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .designer-note-text {
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .designer-note-text.loading {
+      opacity: 0.55;
+    }
+
     /* Layout Card */
     .layout-card {
       height: clamp(280px, 38vh, 420px);
@@ -1367,6 +1438,10 @@
         height: 240px;
       }
 
+      .moodboard-frame {
+        aspect-ratio: 16 / 9;
+      }
+
       .product-list {
         grid-template-columns: 1fr;
       }
@@ -1646,6 +1721,20 @@
           <div class="arch arch-two"></div>
           <div class="mood-glow"></div>
         </div>
+
+        <!-- AI Moodboard card -->
+        <div class="moodboard-card glass-card" id="moodboard-card">
+          <div class="card-heading">
+            <span>AI MOODBOARD <span class="hf-badge">GENERATED</span></span>
+            <span class="area-badge" id="moodboard-badge">Live render</span>
+          </div>
+          <div class="moodboard-frame" id="moodboard-frame">
+            <p class="moodboard-loading" id="moodboard-loading"><span class="dot green"></span> Click "Generate my
+              design" to render a live moodboard</p>
+            <img id="moodboard-img" class="moodboard-img" alt="AI-generated moodboard of the selected bathroom design"
+              hidden />
+          </div>
+        </div>
       </div>
 
       <!-- Products section -->
@@ -1661,6 +1750,11 @@
           </div>
         </div>
         <div id="products" class="product-list"></div>
+        <div class="designer-note glass-card" id="designer-note">
+          <p class="designer-note-label">DESIGNER'S NOTE <span class="hf-badge">AI</span></p>
+          <p id="designer-note-text" class="designer-note-text">Click "Generate my design" for a personalized pitch on
+            this collection.</p>
+        </div>
         <div class="impact-card">
           <div class="impact-icon-wrap">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1970,6 +2064,139 @@
           disableForReducedMotion: true
         });
       }
+
+      // 4. AI Designer's Note + AI Moodboard — only on explicit user actions,
+      // never on slider drags, so the free-tier APIs never get hammered and
+      // the page never depends on a network call just to load.
+      if (triggerType === 'submit') {
+        fetchDesignerNote(currentTheme, chosen, total, saved, budget);
+        requestMoodboard(currentTheme, chosen);
+      }
+    }
+
+    // ── AI Designer's Note (backend proxy first, then Pollinations, then local) ──
+
+    // Set this after deploying backend/worker.js (see backend/README.md).
+    // Left empty, the app just skips straight to the direct Pollinations call
+    // below — nothing breaks if the backend isn't deployed yet.
+    const WORKER_URL = 'kohler-atelier-backend.kapooraraj070306.workers.dev'; // e.g. 'https://kohler-atelier-backend.YOUR-SUBDOMAIN.workers.dev'
+
+    let rationaleController = null;
+
+    function localRationale(theme, chosenList, total, saved) {
+      const standout = chosenList[0];
+      const moodLine = {
+        'Minimalist Modern': 'a quiet, considered retreat',
+        'Japanese Zen': 'a calm, grounded escape',
+        'Classic Luxury': 'a warm, timeless statement'
+      }[theme] || 'a considered retreat';
+      return `This collection reads as ${moodLine}, anchored by the ${standout ? standout.name : 'featured piece'}. ` +
+        `At ${money(total)}, it stays within your budget while saving an estimated ${saved.toLocaleString()} gallons a year — ` +
+        `thoughtful design that respects both your space and the planet.`;
+    }
+
+    async function fetchDesignerNote(theme, chosenList, total, saved, budget) {
+      const noteEl = document.querySelector('#designer-note-text');
+      if (!noteEl || !chosenList.length) return;
+
+      if (rationaleController) rationaleController.abort();
+      rationaleController = new AbortController();
+      const timeout = setTimeout(() => rationaleController.abort(), 8000);
+
+      const standout = chosenList[0];
+      noteEl.classList.add('loading');
+      noteEl.textContent = 'Writing your personalized pitch…';
+
+      // 1. Try the backend proxy first — Groq quality, key kept server-side.
+      if (WORKER_URL) {
+        try {
+          const res = await fetch(`${WORKER_URL}/api/rationale`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              theme,
+              standoutName: standout.name,
+              total: money(total),
+              budget: money(budget),
+              waterSaved: saved
+            }),
+            signal: rationaleController.signal
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.text) {
+              clearTimeout(timeout);
+              noteEl.textContent = data.text;
+              noteEl.classList.remove('loading');
+              return;
+            }
+          }
+        } catch { /* fall through to direct Pollinations call */ }
+      }
+
+      // 2. Fall back to calling Pollinations directly from the browser (keyless).
+      const prompt = `You are a high-end KOHLER interior designer. Write a warm, confident pitch in 3 short sentences ` +
+        `(60 words maximum) for this bathroom design bundle. Theme: ${theme}. Standout product: ${standout.name}. ` +
+        `Total price: ${money(total)}, within a budget of ${money(budget)}. Water saved: ${saved.toLocaleString()} gallons per year. ` +
+        `Do not mention AI, math, algorithms, or budgets directly. Speak purely as a luxury designer. Output only the pitch text, no preamble or quotation marks.`;
+
+      try {
+        const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`, {
+          signal: rationaleController.signal
+        });
+        if (!res.ok) throw new Error('bad response');
+        const text = (await res.text()).trim();
+        if (!text) throw new Error('empty response');
+        noteEl.textContent = text;
+      } catch {
+        // 3. Both network paths failed — deterministic local fallback, never empty.
+        noteEl.textContent = localRationale(theme, chosenList, total, saved);
+      } finally {
+        clearTimeout(timeout);
+        noteEl.classList.remove('loading');
+      }
+    }
+
+    // ── AI Moodboard (Pollinations image, no API key) ──
+
+    let lastMoodboardCall = 0;
+    const MOODBOARD_COOLDOWN = 16000; // stays comfortably above the anonymous free-tier limit
+
+    function buildMoodboardPrompt(theme, chosenList) {
+      const names = chosenList.map(x => x.name).join(', ');
+      return `Interior architectural photography of a ${theme} bathroom, featuring ${names}, ` +
+        `soft natural lighting, realistic materials and textures, professional real estate photography, high detail, no people, no text, no watermark`;
+    }
+
+    function requestMoodboard(theme, chosenList) {
+      const loading = document.querySelector('#moodboard-loading');
+      const img = document.querySelector('#moodboard-img');
+      if (!loading || !img || !chosenList.length) return;
+
+      const now = Date.now();
+      if (now - lastMoodboardCall < MOODBOARD_COOLDOWN) {
+        return; // leave whatever is currently shown rather than spamming the free tier
+      }
+      lastMoodboardCall = now;
+
+      const prompt = buildMoodboardPrompt(theme, chosenList);
+      const seed = Math.floor(Math.random() * 100000);
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=960&height=320&seed=${seed}&nologo=true`;
+
+      loading.hidden = false;
+      loading.innerHTML = '<span class="dot"></span> Rendering your space…';
+      img.hidden = true;
+
+      const probe = new Image();
+      probe.onload = () => {
+        img.src = url;
+        img.hidden = false;
+        loading.hidden = true;
+      };
+      probe.onerror = () => {
+        loading.innerHTML = '<span class="dot"></span> Live preview unavailable right now — showing the mood card above instead.';
+      };
+      probe.src = url;
     }
 
     // ── Event Listeners ──

@@ -268,6 +268,139 @@ function generate(triggerType = 'init') {
       disableForReducedMotion: true
     });
   }
+
+  // 4. AI Designer's Note + AI Moodboard — only on explicit user actions,
+  // never on slider drags, so the free-tier APIs never get hammered and
+  // the page never depends on a network call just to load.
+  if (triggerType === 'submit') {
+    fetchDesignerNote(currentTheme, chosen, total, saved, budget);
+    requestMoodboard(currentTheme, chosen);
+  }
+}
+
+// ── AI Designer's Note (backend proxy first, then Pollinations, then local) ──
+
+// Set this after deploying backend/worker.js (see backend/README.md).
+// Left empty, the app just skips straight to the direct Pollinations call
+// below — nothing breaks if the backend isn't deployed yet.
+const WORKER_URL = 'kohler-atelier-backend.kapooraraj070306.workers.dev'; // e.g. 'https://kohler-atelier-backend.YOUR-SUBDOMAIN.workers.dev'
+
+let rationaleController = null;
+
+function localRationale(theme, chosenList, total, saved) {
+  const standout = chosenList[0];
+  const moodLine = {
+    'Minimalist Modern': 'a quiet, considered retreat',
+    'Japanese Zen': 'a calm, grounded escape',
+    'Classic Luxury': 'a warm, timeless statement'
+  }[theme] || 'a considered retreat';
+  return `This collection reads as ${moodLine}, anchored by the ${standout ? standout.name : 'featured piece'}. ` +
+    `At ${money(total)}, it stays within your budget while saving an estimated ${saved.toLocaleString()} gallons a year — ` +
+    `thoughtful design that respects both your space and the planet.`;
+}
+
+async function fetchDesignerNote(theme, chosenList, total, saved, budget) {
+  const noteEl = document.querySelector('#designer-note-text');
+  if (!noteEl || !chosenList.length) return;
+
+  if (rationaleController) rationaleController.abort();
+  rationaleController = new AbortController();
+  const timeout = setTimeout(() => rationaleController.abort(), 8000);
+
+  const standout = chosenList[0];
+  noteEl.classList.add('loading');
+  noteEl.textContent = 'Writing your personalized pitch…';
+
+  // 1. Try the backend proxy first — Groq quality, key kept server-side.
+  if (WORKER_URL) {
+    try {
+      const res = await fetch(`${WORKER_URL}/api/rationale`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          theme,
+          standoutName: standout.name,
+          total: money(total),
+          budget: money(budget),
+          waterSaved: saved
+        }),
+        signal: rationaleController.signal
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.text) {
+          clearTimeout(timeout);
+          noteEl.textContent = data.text;
+          noteEl.classList.remove('loading');
+          return;
+        }
+      }
+    } catch { /* fall through to direct Pollinations call */ }
+  }
+
+  // 2. Fall back to calling Pollinations directly from the browser (keyless).
+  const prompt = `You are a high-end KOHLER interior designer. Write a warm, confident pitch in 3 short sentences ` +
+    `(60 words maximum) for this bathroom design bundle. Theme: ${theme}. Standout product: ${standout.name}. ` +
+    `Total price: ${money(total)}, within a budget of ${money(budget)}. Water saved: ${saved.toLocaleString()} gallons per year. ` +
+    `Do not mention AI, math, algorithms, or budgets directly. Speak purely as a luxury designer. Output only the pitch text, no preamble or quotation marks.`;
+
+  try {
+    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}`, {
+      signal: rationaleController.signal
+    });
+    if (!res.ok) throw new Error('bad response');
+    const text = (await res.text()).trim();
+    if (!text) throw new Error('empty response');
+    noteEl.textContent = text;
+  } catch {
+    // 3. Both network paths failed — deterministic local fallback, never empty.
+    noteEl.textContent = localRationale(theme, chosenList, total, saved);
+  } finally {
+    clearTimeout(timeout);
+    noteEl.classList.remove('loading');
+  }
+}
+
+// ── AI Moodboard (Pollinations image, no API key) ──
+
+let lastMoodboardCall = 0;
+const MOODBOARD_COOLDOWN = 16000; // stays comfortably above the anonymous free-tier limit
+
+function buildMoodboardPrompt(theme, chosenList) {
+  const names = chosenList.map(x => x.name).join(', ');
+  return `Interior architectural photography of a ${theme} bathroom, featuring ${names}, ` +
+    `soft natural lighting, realistic materials and textures, professional real estate photography, high detail, no people, no text, no watermark`;
+}
+
+function requestMoodboard(theme, chosenList) {
+  const loading = document.querySelector('#moodboard-loading');
+  const img = document.querySelector('#moodboard-img');
+  if (!loading || !img || !chosenList.length) return;
+
+  const now = Date.now();
+  if (now - lastMoodboardCall < MOODBOARD_COOLDOWN) {
+    return; // leave whatever is currently shown rather than spamming the free tier
+  }
+  lastMoodboardCall = now;
+
+  const prompt = buildMoodboardPrompt(theme, chosenList);
+  const seed = Math.floor(Math.random() * 100000);
+  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=960&height=320&seed=${seed}&nologo=true`;
+
+  loading.hidden = false;
+  loading.innerHTML = '<span class="dot"></span> Rendering your space…';
+  img.hidden = true;
+
+  const probe = new Image();
+  probe.onload = () => {
+    img.src = url;
+    img.hidden = false;
+    loading.hidden = true;
+  };
+  probe.onerror = () => {
+    loading.innerHTML = '<span class="dot"></span> Live preview unavailable right now — showing the mood card above instead.';
+  };
+  probe.src = url;
 }
 
 // ── Event Listeners ──

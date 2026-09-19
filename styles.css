@@ -28,7 +28,7 @@
   --indicator: #6366f1;
   --fixture-toilet: #23234a;
   --fixture-vanity: #2d2d5e;
-  --fixture-shower: repeating-linear-gradient(45deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.15) 4px, transparent 4px, transparent 8px);
+  --fixture-shower: repeating-linear-gradient(45deg, rgba(99,102,241,0.15), rgba(99,102,241,0.15) 4px, transparent 4px, transparent 8px);
   --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
   --swatch-2: linear-gradient(135deg, #dbd1bf, #90846e);
   --swatch-3: linear-gradient(135deg, #f2e3c7, #715237);
@@ -61,7 +61,7 @@
   --indicator: #84cc16;
   --fixture-toilet: #1d2a15;
   --fixture-vanity: #2a3d1e;
-  --fixture-shower: repeating-linear-gradient(45deg, rgba(132, 204, 22, 0.12), rgba(132, 204, 22, 0.12) 4px, transparent 4px, transparent 8px);
+  --fixture-shower: repeating-linear-gradient(45deg, rgba(132,204,22,0.12), rgba(132,204,22,0.12) 4px, transparent 4px, transparent 8px);
   --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
   --swatch-2: linear-gradient(135deg, #dbd1bf 0%, #556b2f 100%);
   --swatch-3: linear-gradient(135deg, #f2e3c7, #715237);
@@ -94,7 +94,7 @@
   --indicator: #d97706;
   --fixture-toilet: #2a1e12;
   --fixture-vanity: #3d2a15;
-  --fixture-shower: repeating-linear-gradient(45deg, rgba(217, 119, 6, 0.12), rgba(217, 119, 6, 0.12) 4px, transparent 4px, transparent 8px);
+  --fixture-shower: repeating-linear-gradient(45deg, rgba(217,119,6,0.12), rgba(217,119,6,0.12) 4px, transparent 4px, transparent 8px);
   --swatch-1: linear-gradient(135deg, #e0e0e6 48%, #1a1a2e 49%);
   --swatch-2: linear-gradient(135deg, #dbd1bf, #90846e);
   --swatch-3: linear-gradient(135deg, #d4a574 0%, #78350f 100%);
@@ -104,30 +104,15 @@
 }
 
 /* --- TRANSITIONS --- */
-body,
-.design-panel,
-.control-panel,
-.glass-card,
-.mood-card,
-.impact-card,
-.theme,
-.scan-button,
-.product-symbol,
-.arch-one,
-.arch-two,
-.fixture,
-.room,
-.window,
-.door,
-.generate,
-.toggle-track {
+body, .design-panel, .control-panel, .glass-card,
+.mood-card, .impact-card, .theme, .scan-button,
+.product-symbol, .arch-one, .arch-two, .fixture, .room,
+.window, .door, .generate, .toggle-track {
   transition: background 0.6s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
 }
 
 /* --- RESET & BASE --- */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -196,9 +181,7 @@ body {
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 /* --- TOP BAR --- */
@@ -297,7 +280,7 @@ body {
 .panel-glass {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 60%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -315,11 +298,9 @@ body {
 .panel-content::-webkit-scrollbar {
   width: 4px;
 }
-
 .panel-content::-webkit-scrollbar-track {
   background: transparent;
 }
-
 .panel-content::-webkit-scrollbar-thumb {
   background: var(--glass-border);
   border-radius: 4px;
@@ -563,17 +544,9 @@ input[type="range"]::-moz-range-thumb {
   z-index: 1;
 }
 
-.modern {
-  background: var(--swatch-1);
-}
-
-.zen {
-  background: var(--swatch-2);
-}
-
-.classic {
-  background: var(--swatch-3);
-}
+.modern { background: var(--swatch-1); }
+.zen { background: var(--swatch-2); }
+.classic { background: var(--swatch-3); }
 
 /* AI Field */
 .ai-field {
@@ -645,17 +618,8 @@ textarea:focus {
 }
 
 @keyframes pulse-star {
-
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.6;
-    transform: scale(1.2);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
 }
 
 .ai-status {
@@ -768,11 +732,11 @@ textarea:focus {
   transition: all 0.3s ease;
 }
 
-.toggle input:checked~.toggle-track {
+.toggle input:checked ~ .toggle-track {
   background: var(--accent-1);
 }
 
-.toggle input:checked~.toggle-track .toggle-thumb {
+.toggle input:checked ~ .toggle-track .toggle-thumb {
   left: 18px;
   background: white;
   box-shadow: 0 0 8px var(--accent-glow);
@@ -806,7 +770,7 @@ textarea:focus {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
   transform: translateX(-100%);
   transition: transform 0.6s ease;
 }
@@ -912,6 +876,77 @@ textarea:focus {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
 
+/* AI Moodboard */
+.moodboard-card {
+  grid-column: 1 / -1;
+  padding: 0;
+  overflow: hidden;
+}
+
+.moodboard-card .card-heading {
+  align-items: center;
+}
+
+.moodboard-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 5;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mood-bg);
+}
+
+.moodboard-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 320px;
+  padding: 0 20px;
+}
+
+.moodboard-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: fadeInUp 0.6s ease;
+}
+
+/* Designer's Note */
+.designer-note {
+  margin-top: 14px;
+  padding: 16px 20px;
+}
+
+.designer-note-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.designer-note-text {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0;
+  transition: opacity 0.3s ease;
+}
+
+.designer-note-text.loading {
+  opacity: 0.55;
+}
+
 /* Layout Card */
 .layout-card {
   height: clamp(280px, 38vh, 420px);
@@ -1013,10 +1048,7 @@ textarea:focus {
 }
 
 @keyframes fixtureIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
+  from { opacity: 0; transform: scale(0.8); }
 }
 
 .fixture.toilet {
@@ -1142,17 +1174,8 @@ textarea:focus {
 }
 
 @keyframes glow-pulse {
-
-  0%,
-  100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
 }
 
 /* --- RESULTS --- */
@@ -1352,6 +1375,10 @@ textarea:focus {
     height: 240px;
   }
 
+  .moodboard-frame {
+    aspect-ratio: 16 / 9;
+  }
+
   .product-list {
     grid-template-columns: 1fr;
   }
@@ -1393,27 +1420,13 @@ textarea:focus {
 
 /* --- ANIMATIONS --- */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .control-panel h1 {
@@ -1430,21 +1443,10 @@ fieldset {
   animation: fadeInUp 0.5s ease backwards;
 }
 
-fieldset:nth-of-type(1) {
-  animation-delay: 0.4s;
-}
-
-fieldset:nth-of-type(2) {
-  animation-delay: 0.5s;
-}
-
-fieldset:nth-of-type(3) {
-  animation-delay: 0.6s;
-}
-
-fieldset:nth-of-type(4) {
-  animation-delay: 0.7s;
-}
+fieldset:nth-of-type(1) { animation-delay: 0.4s; }
+fieldset:nth-of-type(2) { animation-delay: 0.5s; }
+fieldset:nth-of-type(3) { animation-delay: 0.6s; }
+fieldset:nth-of-type(4) { animation-delay: 0.7s; }
 
 .generate {
   animation: fadeInUp 0.5s ease backwards;

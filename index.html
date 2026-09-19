@@ -925,6 +925,261 @@ textarea:focus {
   display: none;
 }
 
+/* Design Tier Tabs */
+.tier-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.tier-tab {
+  text-align: left;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: var(--text-secondary);
+  font-family: "Outfit", sans-serif;
+}
+
+.tier-tab:hover {
+  border-color: var(--accent-1);
+  background: var(--bg-card-hover);
+}
+
+.tier-tab.active {
+  border-color: var(--accent-1);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 16px var(--accent-glow);
+  color: var(--text-primary);
+}
+
+.tier-tab-name {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.tier-tab-price {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.tier-tab-meta {
+  display: block;
+  font-size: 9.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Moodboard Before/After panes */
+.moodboard-pane {
+  flex: 1;
+  align-self: stretch;
+  position: relative;
+  min-width: 0;
+}
+
+.moodboard-pane-before {
+  border-right: 1px solid var(--glass-border);
+}
+
+.moodboard-pane-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+/* Why This Works */
+.why-works {
+  padding: 16px 20px;
+  margin-top: 14px;
+}
+
+.why-works-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.why-works-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 8px 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.why-works-list li {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.why-works-check {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.why-works-warn {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+/* Trade-off Panel */
+.tradeoff-panel {
+  padding: 16px 20px;
+  border-color: rgba(217, 119, 6, 0.35);
+}
+
+.tradeoff-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.tradeoff-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.tradeoff-list li {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  padding-left: 16px;
+  position: relative;
+}
+
+.tradeoff-list li::before {
+  content: '\2192';
+  position: absolute;
+  left: 0;
+  color: var(--accent-2);
+}
+
+/* Sustainability Bar */
+.eco-bar-wrap {
+  margin-top: 14px;
+}
+
+.eco-bar-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.eco-bar-label span:last-child {
+  color: var(--accent-2);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.eco-bar-track {
+  height: 8px;
+  border-radius: 100px;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+.eco-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: var(--gradient-accent);
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+/* Product Swap */
+.product {
+  grid-template-columns: 36px 1fr auto auto;
+}
+
+.product-swap {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  transition: all 0.25s ease;
+  align-self: center;
+}
+
+.product-swap:hover {
+  border-color: var(--accent-1);
+  color: var(--accent-1);
+}
+
+.product-alternatives:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+.product-alt-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-family: "Outfit", sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.product-alt-btn:hover {
+  border-color: var(--accent-1);
+  background: var(--bg-card-hover);
+}
+
+.product-alt-delta {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
 .moodboard-img {
   width: 100%;
   height: 100%;
@@ -1402,6 +1657,23 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
+  .tier-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .why-works-list {
+    grid-template-columns: 1fr;
+  }
+
+  .moodboard-frame {
+    flex-direction: column;
+  }
+
+  .moodboard-pane-before {
+    border-right: 0;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
   .top-nav {
     display: none;
   }
@@ -1614,6 +1886,8 @@ fieldset:nth-of-type(4) { animation-delay: 0.7s; }
           </button>
         </div>
 
+        <div id="tier-tabs" class="tier-tabs"></div>
+
         <div class="scene-area">
           <!-- Spatial plan card -->
           <div class="layout-card glass-card">
@@ -1654,7 +1928,14 @@ fieldset:nth-of-type(4) { animation-delay: 0.7s; }
             </div>
             <div class="moodboard-frame" id="moodboard-frame">
               <p class="moodboard-loading" id="moodboard-loading"><span class="dot green"></span> Click "Generate my design" to render a live moodboard</p>
-              <img id="moodboard-img" class="moodboard-img" alt="AI-generated moodboard of the selected bathroom design" hidden />
+              <div class="moodboard-pane moodboard-pane-before" id="moodboard-before-pane" hidden>
+                <span class="moodboard-pane-label">BEFORE</span>
+                <img id="moodboard-before-img" class="moodboard-img" alt="Your uploaded bathroom photo" />
+              </div>
+              <div class="moodboard-pane moodboard-pane-after" id="moodboard-after-pane">
+                <span class="moodboard-pane-label" id="moodboard-after-label" hidden>AI CONCEPT</span>
+                <img id="moodboard-img" class="moodboard-img" alt="AI-generated moodboard of the selected bathroom design" hidden />
+              </div>
             </div>
           </div>
         </div>
@@ -1672,6 +1953,14 @@ fieldset:nth-of-type(4) { animation-delay: 0.7s; }
             </div>
           </div>
           <div id="products" class="product-list"></div>
+          <div class="tradeoff-panel glass-card" id="tradeoff-panel" hidden>
+            <p class="tradeoff-title">Your current requirements conflict</p>
+            <ul class="tradeoff-list" id="tradeoff-list"></ul>
+          </div>
+          <div class="why-works glass-card" id="why-works">
+            <p class="why-works-label">WHY THIS WORKS</p>
+            <ul class="why-works-list" id="why-works-list"></ul>
+          </div>
           <div class="designer-note glass-card" id="designer-note">
             <p class="designer-note-label">DESIGNER'S NOTE <span class="hf-badge">AI</span></p>
             <p id="designer-note-text" class="designer-note-text">Click "Generate my design" for a personalized pitch on this collection.</p>
@@ -1685,6 +1974,10 @@ fieldset:nth-of-type(4) { animation-delay: 0.7s; }
               <span>estimated water saved every year</span>
             </div>
             <p class="impact-note">Compared with conventional fixtures. Calculated from product flow specifications.</p>
+          </div>
+          <div class="eco-bar-wrap" id="eco-bar-wrap">
+            <div class="eco-bar-label"><span>Water efficiency vs. the most sustainable option for this room</span><span id="eco-bar-pct">0%</span></div>
+            <div class="eco-bar-track"><div class="eco-bar-fill" id="eco-bar-fill"></div></div>
           </div>
         </section>
       </section>
@@ -1703,8 +1996,10 @@ fieldset:nth-of-type(4) { animation-delay: 0.7s; }
           <span class="product-type"></span>
           <strong class="product-name"></strong>
           <small class="product-detail"></small>
+          <div class="product-alternatives" hidden></div>
         </div>
         <div class="product-price"></div>
+        <button type="button" class="product-swap" title="Swap for an alternative">⇄</button>
       </article>
     </template>
 
@@ -1846,21 +2141,31 @@ function dismissLoader() {
 }
 
 // ── Core generation logic ──
-function generate(triggerType = 'init') {
-  document.body.setAttribute('data-theme', currentTheme);
 
-  const width = +document.querySelector('#width').value || 8;
-  const length = +document.querySelector('#length').value || 10;
-  const budget = +document.querySelector('#budget').value;
-  const area = width * length;
-  const eco = document.querySelector('#sustainability').checked;
+const GROUPS = ['INTELLIGENT TOILET', 'VANITY', 'SHOWER SYSTEM', 'FAUCET'];
 
-  const groups = ['INTELLIGENT TOILET', 'VANITY', 'SHOWER SYSTEM', 'FAUCET'];
+const TIER_META = {
+  essential: { label: 'Essential', budgetFactor: 0.55, eco: false },
+  signature: { label: 'Signature', budgetFactor: 1, eco: null }, // null = use the user's toggle
+  sustainable: { label: 'Sustainable', budgetFactor: 1, eco: true }
+};
+
+let activeTier = 'signature';
+let currentVariants = {};
+let manualOverrides = { essential: {}, signature: {}, sustainable: {} };
+let lastParams = null;
+let lastPhotoDataURL = null;
+
+// Pure solver: given a theme/area/budget/ranking mode, greedily fills one
+// item per category within budget, falling back to a cheapest-first pass
+// if fewer than 3 categories could be filled. Used for all three design
+// tiers so they share one source of truth for what "fits" means.
+function solveBundle(theme, area, budget, eco) {
   let remaining = budget;
 
-  const chosen = groups.map(type => {
+  let chosen = GROUPS.map(type => {
     const matches = catalog.filter(x =>
-      x.type === type && x.styles.includes(currentTheme) && x.minArea <= area && x.price <= remaining
+      x.type === type && x.styles.includes(theme) && x.minArea <= area && x.price <= remaining
     );
     const candidate = matches.sort((a, b) =>
       eco ? (b.water - b.price / 1000) - (a.water - a.price / 1000) : b.price - a.price
@@ -1869,11 +2174,10 @@ function generate(triggerType = 'init') {
     return candidate;
   }).filter(Boolean);
 
-  // Fallback
   if (chosen.length < 3) {
-    const fallback = catalog.filter(x => x.styles.includes(currentTheme) && x.minArea <= area).sort((a, b) => a.price - b.price);
+    const fallback = catalog.filter(x => x.styles.includes(theme) && x.minArea <= area).sort((a, b) => a.price - b.price);
     remaining = budget;
-    chosen.length = 0;
+    chosen = [];
     fallback.forEach(x => {
       if (!chosen.some(p => p.type === x.type) && x.price <= remaining) {
         chosen.push(x);
@@ -1884,8 +2188,180 @@ function generate(triggerType = 'init') {
 
   const total = chosen.reduce((s, x) => s + x.price, 0);
   const saved = chosen.reduce((s, x) => s + x.water, 0);
+  return { chosen, total, saved };
+}
 
-  // Update text
+// For any category the solver couldn't fill, explains whether the room is
+// too small (no candidate fits the area at all) or the budget is too low
+// (a candidate exists but costs more than what's left), with a concrete
+// number rather than a bare "no products found."
+function diagnoseGaps(theme, area, budget, chosen, total) {
+  const missing = GROUPS.filter(type => !chosen.some(x => x.type === type));
+  const remaining = budget - total;
+
+  return missing.map(type => {
+    const fitsArea = catalog.filter(x => x.type === type && x.styles.includes(theme) && x.minArea <= area);
+    if (!fitsArea.length) {
+      return { type, message: `Your room is too small to fit a ${type.toLowerCase()} in this style — try a larger room or a different design language.` };
+    }
+    const cheapest = fitsArea.sort((a, b) => a.price - b.price)[0];
+    const gap = Math.max(0, Math.round(cheapest.price - remaining));
+    return { type, message: `Add ${money(gap)} more to your budget to include a ${type.toLowerCase()} (${cheapest.name}).` };
+  });
+}
+
+// Up to 2 real in-catalog alternatives for the swap panel, same category/
+// theme/room-fit as the current pick, cheapest first.
+function findAlternatives(type, currentId, theme, area) {
+  return catalog
+    .filter(x => x.type === type && x.id !== currentId && x.styles.includes(theme) && x.minArea <= area)
+    .sort((a, b) => a.price - b.price)
+    .slice(0, 2);
+}
+
+// Applies any manual swaps on top of the active tier's solved bundle.
+function getActiveBundle() {
+  const base = currentVariants[activeTier];
+  const overrides = manualOverrides[activeTier];
+  const chosen = base.chosen.map(item => overrides[item.type] || item);
+  const total = chosen.reduce((s, x) => s + x.price, 0);
+  const saved = chosen.reduce((s, x) => s + x.water, 0);
+  return { chosen, total, saved };
+}
+
+function renderTierTabs() {
+  const wrap = document.querySelector('#tier-tabs');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+
+  Object.keys(TIER_META).forEach(key => {
+    const variant = currentVariants[key];
+    if (!variant) return;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `tier-tab${key === activeTier ? ' active' : ''}`;
+    btn.innerHTML = `
+      <span class="tier-tab-name">${TIER_META[key].label}</span>
+      <span class="tier-tab-price">${money(variant.total)}</span>
+      <span class="tier-tab-meta">${variant.chosen.length}/${GROUPS.length} products · ${variant.saved.toLocaleString()} gal/yr</span>
+    `;
+    btn.addEventListener('click', () => {
+      if (activeTier === key) return;
+      activeTier = key;
+      renderTierTabs();
+      renderActiveDesign('submit');
+    });
+    wrap.appendChild(btn);
+  });
+}
+
+function renderProducts(chosen, theme, area) {
+  const list = document.querySelector('#products');
+  list.innerHTML = '';
+  const t = document.querySelector('#product-template');
+  const productIcons = ['🚿', '🪞', '🚰', '💧'];
+
+  chosen.forEach((x, i) => {
+    const node = t.content.cloneNode(true);
+    node.querySelector('.product-type').textContent = x.type;
+    node.querySelector('.product-name').textContent = x.name;
+    node.querySelector('.product-detail').textContent = x.detail;
+    node.querySelector('.product-price').textContent = money(x.price);
+    node.querySelector('.product-symbol').textContent = productIcons[i] || '✦';
+
+    const swapBtn = node.querySelector('.product-swap');
+    const altPanel = node.querySelector('.product-alternatives');
+    const alternatives = findAlternatives(x.type, x.id, theme, area);
+
+    if (!alternatives.length) {
+      swapBtn.disabled = true;
+      swapBtn.title = 'No in-catalog alternative for this room/style';
+      swapBtn.style.opacity = '0.35';
+      swapBtn.style.cursor = 'not-allowed';
+    } else {
+      swapBtn.title = 'Swap for an alternative';
+      swapBtn.addEventListener('click', () => {
+        const wasOpen = !altPanel.hidden;
+        document.querySelectorAll('.product-alternatives').forEach(p => { p.hidden = true; });
+        altPanel.hidden = wasOpen;
+        if (wasOpen) return;
+
+        altPanel.innerHTML = alternatives.map(alt => {
+          const delta = alt.price - x.price;
+          const deltaText = delta === 0 ? 'same price' : delta > 0 ? `+${money(delta)}` : `\u2212${money(Math.abs(delta))}`;
+          return `<button type="button" class="product-alt-btn" data-alt-id="${alt.id}"><span>${alt.name}</span><span class="product-alt-delta">${deltaText}</span></button>`;
+        }).join('');
+
+        altPanel.querySelectorAll('.product-alt-btn').forEach(altBtn => {
+          altBtn.addEventListener('click', () => {
+            const altItem = catalog.find(c => c.id === altBtn.dataset.altId);
+            if (altItem) {
+              manualOverrides[activeTier][x.type] = altItem;
+              renderActiveDesign('slider');
+            }
+          });
+        });
+      });
+    }
+
+    list.appendChild(node);
+  });
+}
+
+function renderWhyWorks(theme, width, length, area, budget, chosen, total) {
+  const list = document.querySelector('#why-works-list');
+  if (!list) return;
+
+  const styleMatches = chosen.filter(x => x.styles.includes(theme)).length;
+  const styleMatchPct = chosen.length ? Math.round((styleMatches / chosen.length) * 100) : 0;
+  const completenessPct = Math.round((chosen.length / GROUPS.length) * 100);
+  const remaining = Math.max(0, budget - total);
+
+  const items = [
+    { ok: true, text: `Fits within ${width}\u00d7${length} ft (${area.toFixed(0)} sq ft)` },
+    { ok: true, text: `${money(total)} total \u00b7 ${money(remaining)} remaining of budget` },
+    { ok: styleMatchPct === 100, text: `${styleMatchPct}% match to ${theme}` },
+    { ok: completenessPct === 100, text: `${chosen.length}/${GROUPS.length} categories filled (${completenessPct}%)` }
+  ];
+
+  list.innerHTML = items.map(item =>
+    `<li><span class="${item.ok ? 'why-works-check' : 'why-works-warn'}">${item.ok ? '\u2713' : '!'}</span> ${item.text}</li>`
+  ).join('');
+}
+
+function renderTradeoff(gaps) {
+  const panel = document.querySelector('#tradeoff-panel');
+  const list = document.querySelector('#tradeoff-list');
+  if (!panel || !list) return;
+
+  if (!gaps.length) {
+    panel.hidden = true;
+    return;
+  }
+  panel.hidden = false;
+  list.innerHTML = gaps.map(g => `<li>${g.message}</li>`).join('');
+}
+
+function renderEcoBar(saved) {
+  const pctEl = document.querySelector('#eco-bar-pct');
+  const fillEl = document.querySelector('#eco-bar-fill');
+  if (!pctEl || !fillEl) return;
+
+  const maxSaved = currentVariants.sustainable ? currentVariants.sustainable.saved : saved;
+  const pct = maxSaved > 0 ? Math.min(100, Math.round((saved / maxSaved) * 100)) : 0;
+  pctEl.textContent = `${pct}%`;
+  fillEl.style.width = `${pct}%`;
+}
+
+// Renders everything for whichever tier is currently active: room diagram,
+// product cards (with swap), the why-this-works checklist, trade-off
+// panel if anything's missing, the sustainability bar, plugin animations,
+// and — only on an explicit user action — the AI designer's note and moodboard.
+function renderActiveDesign(triggerType) {
+  if (!lastParams) return;
+  const { width, length, budget, area } = lastParams;
+  const { chosen, total, saved } = getActiveBundle();
+
   const [title, bundle, mood] = themes[currentTheme];
   document.querySelector('#concept-title').textContent = title;
   document.querySelector('#bundle-name').textContent = bundle.replace('THE ', '').split(' ').map(x => x[0] + x.slice(1).toLowerCase()).join(' ');
@@ -1913,22 +2389,12 @@ function generate(triggerType = 'init') {
     room.appendChild(el);
   });
 
-  // Product cards
-  const list = document.querySelector('#products');
-  list.innerHTML = '';
-  const t = document.querySelector('#product-template');
-  const productIcons = ['🚿', '🪞', '🚰', '💧'];
-  chosen.forEach((x, i) => {
-    const node = t.content.cloneNode(true);
-    node.querySelector('.product-type').textContent = x.type;
-    node.querySelector('.product-name').textContent = x.name;
-    node.querySelector('.product-detail').textContent = x.detail;
-    node.querySelector('.product-price').textContent = money(x.price);
-    node.querySelector('.product-symbol').textContent = productIcons[i] || '✦';
-    list.appendChild(node);
-  });
+  renderProducts(chosen, currentTheme, area);
+  renderWhyWorks(currentTheme, width, length, area, budget, chosen, total);
+  renderTradeoff(diagnoseGaps(currentTheme, area, budget, chosen, total));
+  renderEcoBar(saved);
 
-  window.designSummary = `Kohler Atelier: ${currentTheme}, ${width}×${length} ft, ${money(total)} collection, ${saved.toLocaleString()} gallons/year saved.`;
+  window.designSummary = `Kohler Atelier: ${currentTheme}, ${width}\u00d7${length} ft, ${money(total)} collection, ${saved.toLocaleString()} gallons/year saved.`;
 
   // ── Plugin Integrations ──
 
@@ -1963,7 +2429,6 @@ function generate(triggerType = 'init') {
       { opacity: 1, x: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out', clearProps: 'all' }
     );
 
-    // Animated counting
     const totalEl = document.querySelector('#total');
     const waterEl = document.querySelector('#water-saved');
     const curTotal = parseFloat(totalEl.textContent.replace(/[^0-9.-]+/g, '')) || 0;
@@ -1998,12 +2463,34 @@ function generate(triggerType = 'init') {
   }
 
   // 4. AI Designer's Note + AI Moodboard — only on explicit user actions,
-  // never on slider drags, so the free-tier APIs never get hammered and
-  // the page never depends on a network call just to load.
+  // never on slider drags or swaps, so the free-tier APIs never get
+  // hammered and the page never depends on a network call just to load.
   if (triggerType === 'submit') {
     fetchDesignerNote(currentTheme, chosen, total, saved, budget);
     requestMoodboard(currentTheme, chosen);
   }
+}
+
+function generate(triggerType = 'init') {
+  document.body.setAttribute('data-theme', currentTheme);
+
+  const width = +document.querySelector('#width').value || 8;
+  const length = +document.querySelector('#length').value || 10;
+  const budget = +document.querySelector('#budget').value;
+  const area = width * length;
+  const eco = document.querySelector('#sustainability').checked;
+
+  activeTier = 'signature';
+  currentVariants = {
+    essential: solveBundle(currentTheme, area, Math.round(budget * TIER_META.essential.budgetFactor), TIER_META.essential.eco),
+    signature: solveBundle(currentTheme, area, budget, eco),
+    sustainable: solveBundle(currentTheme, area, budget, TIER_META.sustainable.eco)
+  };
+  manualOverrides = { essential: {}, signature: {}, sustainable: {} };
+  lastParams = { width, length, budget, area };
+
+  renderTierTabs();
+  renderActiveDesign(triggerType);
 }
 
 // ── AI Designer's Note (backend proxy first, then Pollinations, then local) ──
@@ -2100,9 +2587,15 @@ function buildMoodboardPrompt(theme, chosenList) {
     `soft natural lighting, realistic materials and textures, professional real estate photography, high detail, no people, no text, no watermark`;
 }
 
+// If the user uploaded a photo via Photo Style Match, show it alongside the
+// generated moodboard as a Before/After pair; otherwise show the generated
+// image alone, exactly as before.
 function requestMoodboard(theme, chosenList) {
   const loading = document.querySelector('#moodboard-loading');
   const img = document.querySelector('#moodboard-img');
+  const beforePane = document.querySelector('#moodboard-before-pane');
+  const beforeImg = document.querySelector('#moodboard-before-img');
+  const afterLabel = document.querySelector('#moodboard-after-label');
   if (!loading || !img || !chosenList.length) return;
 
   const now = Date.now();
@@ -2124,6 +2617,15 @@ function requestMoodboard(theme, chosenList) {
     img.src = url;
     img.hidden = false;
     loading.hidden = true;
+
+    if (lastPhotoDataURL && beforePane && beforeImg && afterLabel) {
+      beforeImg.src = lastPhotoDataURL;
+      beforePane.hidden = false;
+      afterLabel.hidden = false;
+    } else if (beforePane && afterLabel) {
+      beforePane.hidden = true;
+      afterLabel.hidden = true;
+    }
   };
   probe.onerror = () => {
     loading.innerHTML = '<span class="dot"></span> Live preview unavailable right now — showing the mood card above instead.';
@@ -2304,6 +2806,7 @@ photoInput.addEventListener('change', e => {
     img.onload = () => {
       const { theme, topColors } = analyzePhoto(img);
       currentTheme = theme;
+      lastPhotoDataURL = ev.target.result;
 
       photoDropzone.classList.add('has-image');
       photoDropzone.innerHTML = `

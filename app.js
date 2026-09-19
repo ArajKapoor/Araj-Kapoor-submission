@@ -2,18 +2,31 @@
    KOHLER ATELIER – Application Logic
    ============================================================ */
 
-// ── Product Catalog (prices in INR) ──
+// ── Product Catalog ──
+// Base prices are real 2026 U.S. retail figures for the actual SKU noted,
+// converted to INR at a representative ~87 USD/INR rate (Kohler India list
+// pricing differs from this due to import duty and a separate regional
+// catalog — see DATA_SOURCES.md for the exact source page and confidence
+// level of every field below, including which figures are directly sourced
+// vs. reasonably estimated from comparable in-collection products).
+//
+// Annual water-savings figures are computed, not invented, using:
+//   Toilets:  (3.5 GPF pre-1994 baseline − product GPF) × 7,300 flushes/yr
+//             (household of 4, 5 flushes/person/day — EPA WaterSense reference usage)
+//   Faucets:  (2.2 GPM conventional baseline − product GPM) × 10 min/day × 365
+//   Showers:  (2.5 GPM federal-max baseline − product GPM) × 8 min/day × 365
+// See DATA_SOURCES.md for the worked calculation per product.
 const catalog = [
-  { id: 'numi', type: 'INTELLIGENT TOILET', name: 'Numi 2.0', price: 8500, styles: ['Minimalist Modern'], water: 4200, minArea: 48, size: [1.6, 2.5], position: [0.12, 0.12], detail: 'Dual-flush · ambient light' },
-  { id: 'eir', type: 'INTELLIGENT TOILET', name: 'Eir Smart Toilet', price: 5200, styles: ['Japanese Zen', 'Minimalist Modern'], water: 3900, minArea: 38, size: [1.55, 2.35], position: [0.12, 0.12], detail: 'Water-saving · heated seat' },
-  { id: 'memoirs', type: 'INTELLIGENT TOILET', name: 'Memoirs Comfort', price: 3100, styles: ['Classic Luxury'], water: 3100, minArea: 34, size: [1.65, 2.45], position: [0.12, 0.12], detail: 'Dual flush · skirted design' },
-  { id: 'anthems', type: 'VANITY', name: 'Anthem 36" Vanity', price: 3150, styles: ['Minimalist Modern'], water: 0, minArea: 45, size: [3, 1.8], position: [0.53, 0.08], detail: 'White oak · integrated storage' },
-  { id: 'kallista', type: 'VANITY', name: 'Tresham Vanity', price: 2700, styles: ['Classic Luxury'], water: 0, minArea: 38, size: [3.3, 1.85], position: [0.5, 0.08], detail: 'Walnut · Carrara-inspired top' },
-  { id: 'tailored', type: 'VANITY', name: 'Tailored 30" Vanity', price: 1950, styles: ['Japanese Zen'], water: 0, minArea: 32, size: [2.5, 1.75], position: [0.56, 0.08], detail: 'Natural oak · quiet-close drawers' },
-  { id: 'statement', type: 'SHOWER SYSTEM', name: 'Statement VES', price: 2400, styles: ['Minimalist Modern', 'Japanese Zen'], water: 1800, minArea: 42, size: [2.7, 2.7], position: [0.55, 0.54], detail: 'Katalyst air-induction technology' },
-  { id: 'artifacts', type: 'SHOWER SYSTEM', name: 'Artifacts Shower', price: 2050, styles: ['Classic Luxury'], water: 1500, minArea: 42, size: [2.65, 2.65], position: [0.55, 0.54], detail: 'MasterShower low-flow system' },
-  { id: 'purist', type: 'FAUCET', name: 'Purist Widespread Faucet', price: 650, styles: ['Japanese Zen', 'Minimalist Modern'], water: 700, minArea: 0, size: null, position: null, detail: '1.2 GPM low-flow aerator' },
-  { id: 'components', type: 'FAUCET', name: 'Components Faucet', price: 850, styles: ['Classic Luxury'], water: 650, minArea: 0, size: null, position: null, detail: '1.2 GPM water-saving aerator' }
+  { id: 'numi', type: 'INTELLIGENT TOILET', name: 'Numi 2.0', price: 10999, styles: ['Minimalist Modern'], water: 18980, minArea: 48, size: [1.3, 2.2], position: [0.12, 0.12], detail: '0.8/1.0 GPF dual flush · WaterSense certified' },
+  { id: 'eir', type: 'INTELLIGENT TOILET', name: 'Eir Smart Toilet', price: 7800, styles: ['Japanese Zen', 'Minimalist Modern'], water: 18980, minArea: 38, size: [1.4, 2.3], position: [0.12, 0.12], detail: '0.8/1.0 GPF dual flush · WaterSense certified' },
+  { id: 'memoirs', type: 'INTELLIGENT TOILET', name: 'Memoirs Comfort Height', price: 1050, styles: ['Classic Luxury'], water: 16200, minArea: 34, size: [1.5, 2.3], position: [0.12, 0.12], detail: '1.28 GPF · Comfort Height · WaterSense certified' },
+  { id: 'anthems', type: 'VANITY', name: 'Anthem 36" Vanity Cabinet', price: 1400, styles: ['Minimalist Modern'], water: 0, minArea: 45, size: [3.0, 1.75], position: [0.53, 0.08], detail: '36" cabinet · vanity top sold separately' },
+  { id: 'kallista', type: 'VANITY', name: 'Tresham 36" Vanity Cabinet', price: 899, styles: ['Classic Luxury'], water: 0, minArea: 38, size: [3.0, 1.8], position: [0.5, 0.08], detail: 'Shaker-style cabinet · vanity top sold separately' },
+  { id: 'tailored', type: 'VANITY', name: 'Artifacts 36" Vanity Cabinet', price: 1959, styles: ['Japanese Zen'], water: 0, minArea: 40, size: [3.0, 1.8], position: [0.56, 0.08], detail: 'Light Oak finish · solid-wood dovetail drawers' },
+  { id: 'statement', type: 'SHOWER SYSTEM', name: 'Statement VES Shower', price: 1650, styles: ['Minimalist Modern', 'Japanese Zen'], water: 2200, minArea: 42, size: [2.7, 2.7], position: [0.55, 0.54], detail: 'Katalyst air-induction · 1.75 GPM handshower' },
+  { id: 'artifacts', type: 'SHOWER SYSTEM', name: 'Artifacts Shower', price: 1950, styles: ['Classic Luxury'], water: 1500, minArea: 42, size: [2.65, 2.65], position: [0.55, 0.54], detail: 'WaterSense certified · \u22642.0 GPM' },
+  { id: 'purist', type: 'FAUCET', name: 'Purist Widespread Faucet', price: 880, styles: ['Japanese Zen', 'Minimalist Modern'], water: 3650, minArea: 0, size: null, position: null, detail: '1.2 GPM · WaterSense certified' },
+  { id: 'components', type: 'FAUCET', name: 'Components Faucet', price: 747, styles: ['Classic Luxury'], water: 3650, minArea: 0, size: null, position: null, detail: '1.2 GPM · WaterSense certified' }
 ].map(item => ({ ...item, price: item.price * 87 }));
 
 const themes = {
@@ -283,7 +296,7 @@ function generate(triggerType = 'init') {
 // Set this after deploying backend/worker.js (see backend/README.md).
 // Left empty, the app just skips straight to the direct Pollinations call
 // below — nothing breaks if the backend isn't deployed yet.
-const WORKER_URL = 'kohler-atelier-backend.kapooraraj070306.workers.dev'; // e.g. 'https://kohler-atelier-backend.YOUR-SUBDOMAIN.workers.dev'
+const WORKER_URL = ''; // e.g. 'https://kohler-atelier-backend.YOUR-SUBDOMAIN.workers.dev'
 
 let rationaleController = null;
 

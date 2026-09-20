@@ -296,7 +296,10 @@ function generate(triggerType = 'init') {
 // Set this after deploying backend/worker.js (see backend/README.md).
 // Left empty, the app just skips straight to the direct Pollinations call
 // below — nothing breaks if the backend isn't deployed yet.
-const WORKER_URL = 'kohler-atelier-backend.kapooraraj070306.workers.dev'; // e.g. 'https://kohler-atelier-backend.YOUR-SUBDOMAIN.workers.dev'
+
+// FIXED: Added https:// to ensure the browser makes an absolute request to Cloudflare,
+// rather than a relative request to GitHub Pages.
+const WORKER_URL = 'https://kohler-atelier-backend.kapooraraj070306.workers.dev'; 
 
 let rationaleController = null;
 

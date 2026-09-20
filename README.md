@@ -32,3 +32,5 @@ Both only fire on an explicit "Generate" action (never on slider drags), so the 
 `backend/` contains a small Cloudflare Worker that upgrades the Designer's Note from Pollinations' anonymous model to Groq's free, fast Llama 3.3 70B — with the API key held server-side only, never in the browser or the repo. It's entirely optional: `WORKER_URL` in `app.js` defaults to empty, so without deploying it the app behaves exactly as described above. See `backend/README.md` for the 3-minute deploy path.
 
 `setup_db.py` and `query_db.py` are earlier optional experiments for a future local Ollama + Chroma retrieval layer. The static demo does not depend on them.
+## Video Demonstration Link
+https://drive.google.com/file/d/1JnwM4SnjUTB8q1_5IHpw4dPN6rJdzUEr/view?usp=sharing

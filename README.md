@@ -1,4 +1,4 @@
-# Kohler Atelier
+# Atelier
 
 A free, local-first Track 1 prototype for the Kohler AI Bathroom Designer & Planner challenge.
 
